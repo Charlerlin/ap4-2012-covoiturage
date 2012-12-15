@@ -1,15 +1,12 @@
 package membre;
 
-import java.util.ArrayList;
-
-//trololo le super commentaire inutile
 
 public class Membre {
 	protected String nom;
 	protected String email;
 	protected String telephone;
-	protected ArrayList<String> preferences;
-	
+	protected Preferences preferences;
+
 	/**
 	 * @param nom
 	 * @param email
@@ -17,7 +14,7 @@ public class Membre {
 	 * @param preferences
 	 */
 	public Membre(String nom, String email, String telephone,
-			ArrayList<String> preferences) {
+			Preferences preferences) {
 		super();
 		this.nom = nom;
 		this.email = email;
@@ -30,9 +27,11 @@ public class Membre {
 	 */
 	@Override
 	public String toString() {
-		return "Membre [nom=" + nom + ", email=" + email + ", telephone="
-				+ telephone + ", preferences=" + preferences + "]";
+		return nom;
 	}
-	
-	
+
+	public String toStringLong() {
+		return "Membre : "+nom+", email : "+email+", telephone : "+telephone+", preferences : "+preferences;
+	}
+
 }

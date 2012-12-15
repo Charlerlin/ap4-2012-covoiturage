@@ -37,7 +37,7 @@ public class Trajet {
 		this.dateDepart = dateDepart;
 		this.nbPlaces = nbPlaces;
 		this.conducteur = conducteur;
-		this.passagers = passagers;
+		this.passagers = new ArrayList<Membre>();
 	}
 	
 	public boolean addPassager(Membre p){
@@ -47,10 +47,17 @@ public class Trajet {
 
 	@Override
 	public String toString() {
-		return "Trajet [id=" + id + ", villeDepart=" + villeDepart
-				+ ", villeArrivee=" + villeArrivee + ", dateDepart="
-				+ dateDepart + ", nbPlaces=" + nbPlaces + ", conducteur="
-				+ conducteur + ", passagers=" + passagers + "]";
+		String retour = "Trajet n°"+id+" de "+villeDepart+" à "+villeArrivee+", départ le "+dateDepart;
+		if(nbPlaces<=passagers.size())
+			retour+=", "+(nbPlaces-passagers.size())+" places disponibles";
+		else
+			retour+=", plus de places disponibles";
+		if(conducteur!=null)
+			retour+=", conducteur : "+conducteur+".";
+		else
+			retour+=", en recherche de conducteur.";
+		
+		return retour;
 	}
 	
 	
