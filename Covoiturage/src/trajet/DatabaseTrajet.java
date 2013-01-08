@@ -9,7 +9,7 @@ protected ArrayList<Trajet> listeTrajets;
 		listeTrajets = new ArrayList<Trajet>();
 	}
 	
-	public void addMembre(Trajet t){
+	public void addTrajet(Trajet t){
 		listeTrajets.add(t);
 	}
 }

@@ -12,6 +12,15 @@ public class DatabaseMembre {
 	public void addMembre(Membre m){
 		listeMembres.add(m);
 	}
+	
+	public Membre rechercheMembre(String pseudo){
+		//TODO
+		return null;
+	}
+	public Membre rechercherMembre(String nom){
+		//TODO
+		return null;
+	}
 
 	@Override
 	public String toString() {
