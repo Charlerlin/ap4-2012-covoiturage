@@ -44,9 +44,9 @@ public class Preferences {
 		
 		System.out.println("RŽpondez avec 'o' ou 'n'.");
 		for(String s : basePrefs){
-			System.out.print(s+" ");
+			System.out.print(s+" ? ");
 			String se = sc.nextLine();
-			while(!(se.charAt(0)=='o'||se.charAt(0)=='n')){
+			while(!(se.equals("o")||se.equals("n"))){
 				System.out.println("RŽpondre avec 'o' ou 'n'.");
 				System.out.print(s+" ");
 				se = sc.nextLine();

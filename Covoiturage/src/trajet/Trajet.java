@@ -2,6 +2,7 @@ package trajet;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import membre.Membre;
@@ -65,6 +66,11 @@ public class Trajet {
 		//TODO
 		return null;
 	}
+	
+	public static void main(String[] args) {
+		Trajet t = Trajet.creerTrajetConducteurConsole();
+		System.out.println(t);
+	}
 
 	@Override
 	public String toString() {
@@ -88,7 +94,7 @@ public class Trajet {
 		return retour;
 	}
 	
-	public static Trajet creerTrajetConsole(){
+	public static Trajet creerTrajetConducteurConsole(){
 		System.out.println("Créatin d'un nouveau trajet.");
 		Scanner sc = new Scanner(System.in);
 		
@@ -98,14 +104,55 @@ public class Trajet {
 		String villeArrivee = sc.nextLine();
 		System.out.print("Date de départ (jj/mm/aaaa) : ");
 		String dateDepart = sc.nextLine();
-		System.out.print("Nombre de places proposées : ");
-		String nbPlaces = sc.nextLine();
-		System.out.print("Conducteur : ");
-		String conducteur = sc.nextLine();
+		
+		int nbPlaces=0;
+		boolean nbPlaceOK = false;
+		while(!nbPlaceOK){
+			System.out.print("Nombre de places proposées : ");
+			try{
+				nbPlaces = sc.nextInt();
+				nbPlaceOK = true;
+			}
+			catch(InputMismatchException e){
+				System.out.println("L'entrée n'est pas correcte, merci d'entrer un nombre (sans espaces)");
+				sc = new Scanner(System.in);
+			}
+			
+		}
+		
 		System.out.print("Véhicule : ");
+		sc = new Scanner(System.in);
 		String vehicule = sc.nextLine();
 		System.out.print("Acceptez vous les grands bagages ? (o/n) : ");
 		String grandBagages = sc.nextLine();
+		while(!(grandBagages.equals("o")||grandBagages.equals("n"))){
+			System.out.println("Répondre avec 'o' ou 'n'.");
+			System.out.print("Acceptez vous les grands bagages ? (o/n) : ");
+			grandBagages = sc.nextLine();
+		}
+		boolean placeBagages;
+		if(grandBagages.equals("o")){
+			placeBagages = true;
+		}
+		else{
+			placeBagages = false;
+		}
+		
+		Trajet t = new Trajet(villeDepart, villeArrivee, null, nbPlaces, null /* TODO membre courant*/, vehicule, placeBagages, null);
+		
+		return t;
+	}
+	
+	public static Trajet creerTrajetSouhaitConsole(){
+		System.out.println("Créatin d'un nouveau trajet.");
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Ville de départ : ");
+		String villeDepart = sc.nextLine();
+		System.out.print("Ville d'arrivée : ");
+		String villeArrivee = sc.nextLine();
+		System.out.print("Date de départ souhaitée (jj/mm/aaaa) : ");
+		String dateDepart = sc.nextLine();
 		
 		//TODO
 		
