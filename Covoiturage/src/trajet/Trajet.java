@@ -67,13 +67,13 @@ public class Trajet {
 
 	@Override
 	public String toString() {
-		String retour = "Trajet n°"+id+" de "+villeDepart+" à "+villeArrivee+", départ le "+dateDepart;
+		String retour = "Trajet n¬∞"+id+" de "+villeDepart+" √† "+villeArrivee+", d√©part le "+dateDepart;
 		if(nbPlaces>=passagers.size())
 			retour+=", "+(nbPlaces-passagers.size())+" places disponibles";
 		else
 			retour+=", plus de places disponibles";
 		if(conducteur!=null){
-			retour+=", conducteur : "+conducteur+", véhicule : "+vehicule+", ";
+			retour+=", conducteur : "+conducteur+", v√©hicule : "+vehicule+", ";
 			if(placeGrandBagages){
 				retour+="place pour grands bagages.";
 			}
@@ -88,39 +88,39 @@ public class Trajet {
 	}
 	
 	public static Trajet creerTrajetConducteurConsole(Membre membreCourant){
-		System.out.println("Créatin d'un nouveau trajet.");
+		System.out.println("Cr√©atin d'un nouveau trajet.");
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("Ville de départ : ");
+		System.out.print("Ville de d√©part : ");
 		String villeDepart = sc.nextLine();
-		System.out.print("Ville d'arrivée : ");
+		System.out.print("Ville d'arriv√©e : ");
 		String villeArrivee = sc.nextLine();
-		System.out.print("Date de départ (jj/mm/aaaa) : ");
+		System.out.print("Date de d√©part (jj/mm/aaaa) : ");
 		String dateDepart = sc.nextLine();
 		// TODO parser la date
 		int nbPlaces=0;
 		boolean nbPlaceOK = false;
 		while(!nbPlaceOK){
-			System.out.print("Nombre de places proposées : ");
+			System.out.print("Nombre de places propos√©es : ");
 			try{
 				nbPlaces = sc.nextInt();
 				nbPlaceOK = true;
 				sc.nextLine();
 			}
 			catch(InputMismatchException e){
-				System.out.println("L'entrée n'est pas correcte, merci d'entrer un nombre (sans espaces)");
+				System.out.println("L'entr√©e n'est pas correcte, merci d'entrer un nombre (sans espaces)");
 				//sc = new Scanner(System.in);
 				sc.nextLine();
 			}
 			
 		}
 		
-		System.out.print("Véhicule : ");
+		System.out.print("V√©hicule : ");
 		String vehicule = sc.nextLine();
 		System.out.print("Acceptez vous les grands bagages ? (o/n) : ");
 		String grandBagages = sc.nextLine();
 		while(!(grandBagages.equals("o")||grandBagages.equals("n"))){
-			System.out.println("Répondre avec 'o' ou 'n'.");
+			System.out.println("R√©pondre avec 'o' ou 'n'.");
 			System.out.print("Acceptez vous les grands bagages ? (o/n) : ");
 			grandBagages = sc.nextLine();
 		}
@@ -138,14 +138,14 @@ public class Trajet {
 	}
 	
 	public static Trajet creerTrajetSouhaitConsole(Membre membreCourant){
-		System.out.println("Créatin d'un nouveau trajet.");
+		System.out.println("Cr√©atin d'un nouveau trajet.");
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("Ville de départ : ");
+		System.out.print("Ville de d√©part : ");
 		String villeDepart = sc.nextLine();
-		System.out.print("Ville d'arrivée : ");
+		System.out.print("Ville d'arriv√©e : ");
 		String villeArrivee = sc.nextLine();
-		System.out.print("Date de départ souhaitée (jj/mm/aaaa) : ");
+		System.out.print("Date de d√©part souhait√©e (jj/mm/aaaa) : ");
 		String dateDepart = sc.nextLine();
 		
 		//TODO parser la date

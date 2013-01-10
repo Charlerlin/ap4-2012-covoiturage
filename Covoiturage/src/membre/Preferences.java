@@ -42,12 +42,12 @@ public class Preferences {
 		Preferences listePrefs = new Preferences(); 
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("RŽpondez avec 'o' ou 'n'.");
+		System.out.println("RÃ©pondez avec 'o' ou 'n'.");
 		for(String s : basePrefs){
 			System.out.print(s+" ? ");
 			String se = sc.nextLine();
 			while(!(se.equals("o")||se.equals("n"))){
-				System.out.println("RŽpondre avec 'o' ou 'n'.");
+				System.out.println("RÃ©pondre avec 'o' ou 'n'.");
 				System.out.print(s+" ");
 				se = sc.nextLine();
 			}

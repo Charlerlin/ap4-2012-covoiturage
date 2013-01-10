@@ -39,7 +39,7 @@ public class Covoiturage {
 	protected static void menuConnexion() {
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Connexion au système.");
+		System.out.println("Connexion au syst√®me.");
 		System.out.print("Entrez votre pseudo : ");
 		String pseudo = sc.nextLine();
 
@@ -61,7 +61,7 @@ public class Covoiturage {
 	protected static boolean menuPrincipal(boolean prems) {
 		if (prems) {
 			System.out
-					.println("Tapez 'aide' pour voir le détail des commandes.");
+					.println("Tapez 'aide' pour voir le d√©tail des commandes.");
 			System.out
 					.println("Commandes disponibles : creer, rechercher, afficher, profil, aide (h), quitter.");
 			System.out.println("Que voulez vous faire ?");
@@ -72,12 +72,12 @@ public class Covoiturage {
 
 		if (choix.equals("h") || choix.equals("aide")) {
 			System.out
-					.println("Aide sur les commandes.\nLes commandes sont indiquées en début de ligne et le raccourci entre parenthèses.");
+					.println("Aide sur les commandes.\nLes commandes sont indiqu√©es en d√©but de ligne et le raccourci entre parenth√®ses.");
 			System.out.println("aide\t\t(h)\tAfficher cette aide.");
-			System.out.println("creer\t\t(c)\tCréer un nouveau trajet.");
+			System.out.println("creer\t\t(c)\tCr√©er un nouveau trajet.");
 			System.out.println("rechercher\t(r)\tRechercher un trajet.");
 			System.out.println("afficher\t(a)\tAfficher tous les trajts.");
-			System.out.println("profil\t\t(p)\tAfficher ou éditer le profil.");
+			System.out.println("profil\t\t(p)\tAfficher ou √©diter le profil.");
 			System.out.println("quitter\t\t(q)\tQuitter.");
 		}
 		if (choix.equals("c") || choix.equals("creer")) {
@@ -90,7 +90,7 @@ public class Covoiturage {
 			System.out.println(dbT.toString());
 		}
 		if (choix.equals("p") || choix.equals("profil")) {
-			System.out.println("Afficher (a) ou éditer (e) le profil ?");
+			System.out.println("Afficher (a) ou √©diter (e) le profil ?");
 			System.out.print(">>");
 			choix = sc.nextLine();
 			if (choix.equals("a") || choix.equals("afficher"))
@@ -107,7 +107,7 @@ public class Covoiturage {
 
 	protected static Membre inscription() {
 		System.out
-				.println("Vous êtes un nouveau membre, merci de vous enregistrer.");
+				.println("Vous √™tes un nouveau membre, merci de vous enregistrer.");
 		return Membre.creerMembreConsole();
 	}
 

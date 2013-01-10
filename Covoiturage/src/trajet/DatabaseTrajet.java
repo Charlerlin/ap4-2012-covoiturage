@@ -32,7 +32,7 @@ public class DatabaseTrajet {
 			}	
 		}
 		else{
-			retour = "Il n'y a encore aucun trajet enregistr.";
+			retour = "Il n'y a encore aucun trajet enregistrÃ©.";
 		}
 		return retour;
 	}

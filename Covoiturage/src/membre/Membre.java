@@ -57,7 +57,7 @@ public class Membre {
 
 	public static Membre creerMembreConsole(){
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Création d'un nouveau membre.");
+		System.out.println("Cr√©ation d'un nouveau membre.");
 		System.out.print("Pseudo : ");
 		String pseudo = sc.nextLine();
 		System.out.print("Nom : ");
@@ -66,7 +66,7 @@ public class Membre {
 		String email = sc.nextLine();
 		System.out.print("Telephone : ");
 		String tel = sc.nextLine();
-		System.out.println("Choisissez vos préférences : ");
+		System.out.println("Choisissez vos pr√©f√©rences : ");
 		Preferences prefs= Preferences.creerPrefConsole();
 		
 		Membre m = new Membre(pseudo, nom, email, tel, prefs);
@@ -74,10 +74,10 @@ public class Membre {
 	}
 	
 	public void editMembreConsole(){
-		System.out.println("Édition du profil (appuyer sur Entrée pour ne pas modifier le champ, sauf pour les préférences)");
+		System.out.println("√âdition du profil (appuyer sur Entr√©e pour ne pas modifier le champ, sauf pour les pr√©f√©rences)");
 		System.out.println("Votre nom est : "+nom);
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Nouveau téléphone ? ");
+		System.out.print("Nouveau t√©l√©phone ? ");
 		String tmp = sc.nextLine();
 		if(!tmp.equals(""))
 			telephone = tmp;
