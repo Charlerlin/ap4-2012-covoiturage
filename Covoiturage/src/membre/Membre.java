@@ -41,6 +41,14 @@ public class Membre {
 		return pseudo;
 	}
 
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
 	public String toStringLong() {
 		return "Membre : "+pseudo+", nom : "+nom+", email : "+email+", telephone : "+telephone+", preferences : "+preferences;
 	}
