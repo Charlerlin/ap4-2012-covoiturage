@@ -59,13 +59,6 @@ public class Trajet {
 		return false;
 	}
 	
-	public ArrayList<Trajet> rechercheTrajet(String villeDepart, 
-			String villeArrivee,
-			GregorianCalendar dateDepart,
-			boolean avecConducteur){
-		//TODO
-		return null;
-	}
 	
 	public static void main(String[] args) {
 		Trajet t = Trajet.creerTrajetConducteurConsole(Membre.creerMembreConsole());
@@ -144,7 +137,7 @@ public class Trajet {
 		return t;
 	}
 	
-	public static Trajet creerTrajetSouhaitConsole(){
+	public static Trajet creerTrajetSouhaitConsole(Membre membreCourant){
 		System.out.println("Créatin d'un nouveau trajet.");
 		Scanner sc = new Scanner(System.in);
 		
@@ -155,9 +148,14 @@ public class Trajet {
 		System.out.print("Date de départ souhaitée (jj/mm/aaaa) : ");
 		String dateDepart = sc.nextLine();
 		
-		//TODO
+		//TODO parser la date
 		
-		return null;
+		ArrayList<Membre> passagers = new ArrayList<Membre>();
+		passagers.add(membreCourant);
+		
+		Trajet t = new Trajet(villeDepart, villeArrivee, null, 0, null, "", false, passagers);
+		
+		return t;
 	}
 	
 	

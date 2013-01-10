@@ -31,6 +31,8 @@ public class Membre {
 	public static void main(String[] args) {
 		Membre m = Membre.creerMembreConsole();
 		System.out.println(m.toStringLong());
+		m.editMembreConsole();
+		System.out.println(m.toStringLong());
 	}
 
 	/* (non-Javadoc)
@@ -69,5 +71,23 @@ public class Membre {
 		
 		Membre m = new Membre(pseudo, nom, email, tel, prefs);
 		return m;
+	}
+	
+	public void editMembreConsole(){
+		System.out.println("Édition du profil (appuyer sur Entrée pour ne pas modifier le champ, sauf pour les préférences)");
+		System.out.println("Votre nom est : "+nom);
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Nouveau téléphone ? ");
+		String tmp = sc.nextLine();
+		if(!tmp.equals(""))
+			telephone = tmp;
+		System.out.print("Nouvel email ? ");
+		tmp = sc.nextLine();
+		if(!tmp.equals(""))
+			email = tmp;
+		preferences = Preferences.creerPrefConsole();
+		
+		System.out.println("Voici votre profil :\n"+toStringLong());
+		
 	}
 }
