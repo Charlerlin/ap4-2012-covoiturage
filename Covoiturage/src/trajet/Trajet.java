@@ -5,6 +5,8 @@ import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.joda.time.DateTime;
+
 import membre.Membre;
 
 public class Trajet {
@@ -12,7 +14,7 @@ public class Trajet {
 	protected int id;
 	protected String villeDepart;
 	protected String villeArrivee;
-	protected GregorianCalendar dateDepart;
+	protected DateTime dateDepart;
 	protected int nbPlaces;
 	protected Membre conducteur;
 	protected String vehicule;
@@ -33,7 +35,7 @@ public class Trajet {
 	 */
 	public Trajet(String villeDepart, 
 			String villeArrivee,
-			GregorianCalendar dateDepart, 
+			DateTime dateDepart, 
 			int nbPlaces, 
 			Membre conducteur,
 			String vehicule,
@@ -74,7 +76,7 @@ public class Trajet {
 		return villeArrivee;
 	}
 
-	public GregorianCalendar getDateDepart() {
+	public DateTime getDateDepart() {
 		return dateDepart;
 	}
 
@@ -170,6 +172,23 @@ public class Trajet {
 		Trajet t = new Trajet(villeDepart, villeArrivee, null, 0, null, "", false, passagers);
 		
 		return t;
+	}
+	
+	protected static DateTime entrerDateConsole(){
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Entrer la date de départ souhaitée (jj-mm-aaaa) : ");
+		String date = sc.nextLine();
+		System.out.print("Entrer l'heure de départ souhaitée (hh:mm) : ");
+		String heure = sc.nextLine();
+		
+		String strHoraire = date+" "+heure;
+		
+		DateTime horaire = new DateTime();
+		
+		horaire.parse(strHoraire, "dd-MM-YYYY HH:mm");
+		
+		
+		return null;
 	}
 	
 	

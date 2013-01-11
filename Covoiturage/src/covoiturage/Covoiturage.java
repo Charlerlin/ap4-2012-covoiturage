@@ -1,7 +1,6 @@
 package covoiturage;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -49,10 +48,9 @@ public class Covoiturage {
 
 		Membre m = dbM.rechercheMembre(pseudo);
 
-		// POUR TEST UNIQUEMENT TODO
+		// POUR TEST UNIQUEMENT TODO à supprimer pour fonctionnement normal
 		Preferences preferences = new Preferences();
-		m = new Membre("supercharles", "Charles", "charles@mail.com",
-				"0625434470", preferences);
+		m = new Membre("supercharles", "Charles", "charles@mail.com", "06", preferences);
 		//
 		if (m != null) {
 			membreCourant = m;
@@ -159,6 +157,7 @@ public class Covoiturage {
 		System.out
 				.println("Vous êtes un nouveau membre, merci de vous enregistrer.");
 		return Membre.creerMembreConsole();
+		// TODO verifier si le pseudo n'est pas déjà pris
 	}
 
 }
