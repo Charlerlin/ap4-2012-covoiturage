@@ -64,6 +64,19 @@ public class Trajet {
 		Trajet t = Trajet.creerTrajetConducteurConsole(Membre.creerMembreConsole());
 		System.out.println(t);
 	}
+	
+	//GETTERS
+	public String getVilleDepart() {
+		return villeDepart;
+	}
+
+	public String getVilleArrivee() {
+		return villeArrivee;
+	}
+
+	public GregorianCalendar getDateDepart() {
+		return dateDepart;
+	}
 
 	@Override
 	public String toString() {
@@ -88,7 +101,7 @@ public class Trajet {
 	}
 	
 	public static Trajet creerTrajetConducteurConsole(Membre membreCourant){
-		System.out.println("Créatin d'un nouveau trajet.");
+		System.out.println("Créatin d'un nouveau trajet en tant que conducteur.");
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Ville de départ : ");
@@ -136,9 +149,10 @@ public class Trajet {
 		
 		return t;
 	}
-	
+
+
 	public static Trajet creerTrajetSouhaitConsole(Membre membreCourant){
-		System.out.println("Créatin d'un nouveau trajet.");
+		System.out.println("Créatin d'un nouveau trajet en tant que passager.");
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Ville de départ : ");

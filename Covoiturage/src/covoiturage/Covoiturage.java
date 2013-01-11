@@ -1,11 +1,15 @@
 package covoiturage;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import membre.DatabaseMembre;
 import membre.Membre;
 import membre.Preferences;
 import trajet.DatabaseTrajet;
+import trajet.Trajet;
 
 public class Covoiturage {
 
@@ -81,7 +85,53 @@ public class Covoiturage {
 			System.out.println("quitter\t\t(q)\tQuitter.");
 		}
 		if (choix.equals("c") || choix.equals("creer")) {
-
+			System.out.println("Vous êtes conducteur et proposez un trajet, tapez 'a'.");
+			System.out.println("Vous êtes passagez et recherchez un trajet, tapez 's'.");
+			System.out.print(">>");
+			choix = sc.nextLine();
+			if(choix.equals("a")){
+				Trajet t = Trajet.creerTrajetConducteurConsole(membreCourant);
+				dbT.addTrajet(t);
+			}
+			if(choix.equals("s")){
+				System.out.println("Entrez les détails de votre trajet, nous recherchons un trajet similaire avec conducteur.");
+				Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
+				boolean avecConducteur = false;
+				ArrayList<Trajet> trajets = dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur);
+				
+				if(trajets.size()==0){
+					dbT.addTrajet(t);
+					System.out.println("Aucun trajet avec conducteur ne correspond à votre recherche.");
+					System.out.println("Votre souhait de trajet est bien enregistré, nous vous contacterons dès qu'un conducteur proposera un trajet similaire.");
+				}
+				else{
+					int i = 0;
+					for(Trajet tl : trajets){
+						System.out.println("Trajet n°"+(++i)+" : "+tl);
+					}
+					int choixT = 0;
+					boolean choixTOK = false;
+					while(!choixTOK){
+						System.out.print("Numéro du trajet qui vous intéresse : ");
+						try{
+							choixT = sc.nextInt();
+							choixTOK = true;
+							sc.nextLine();
+						}
+						catch(InputMismatchException e){
+							System.out.println("L'entrée n'est pas correcte, merci d'entrer un nombre (sans espaces)");
+							//sc = new Scanner(System.in);
+							sc.nextLine();
+						}
+						if(choixT<1||choixT>trajets.size()){
+							System.out.println("Choix incorrect !");
+							choixTOK = false;
+						}
+						
+					}
+					
+				}
+			}
 		}
 		if (choix.equals("r") || choix.equals("rechercher")) {
 
