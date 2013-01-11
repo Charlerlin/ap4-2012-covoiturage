@@ -95,8 +95,11 @@ public class Covoiturage {
 				ajoutTrajetSansConducteur();
 			}
 		}
-		if (choix.equals("r") || choix.equals("rechercher")) {
-
+		if (choix.equals("r") || choix.equals("rechercher")) { //TODO
+			System.out.println("Entrez les détails du trajet, nous recherchons les trajets similaires");
+			Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
+			boolean avecConducteur = false;
+			ArrayList<Trajet> trajets = dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur);
 		}
 		if (choix.equals("a") || choix.equals("afficher")) {
 			System.out.println(dbT.toString());

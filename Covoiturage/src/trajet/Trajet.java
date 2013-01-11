@@ -93,11 +93,24 @@ public class Trajet {
 		return dateDepart;
 	}
 
+	public Membre getConducteur() {
+		return conducteur;
+	}
+	public boolean hasConducteur(){
+		return !(conducteur==null);
+	}
+
 	public boolean addPassager(Membre p){
 		if(nbPlaces>passagers.size()){
 			passagers.add(p);
 			return true;
 		}
+		return false;
+	}
+	
+	public boolean dateConcorde(DateTime d){
+		if(dateDepart.minusHours(4).isBefore(d) && dateDepart.plusHours(4).isAfter(d))
+			return true;
 		return false;
 	}
 

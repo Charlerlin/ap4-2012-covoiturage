@@ -1,7 +1,9 @@
 package test;
 
-import membre.*;
-import trajet.*;
+import membre.DatabaseMembre;
+import membre.Membre;
+import membre.Preferences;
+import trajet.Trajet;
 
 public class Test {
 
@@ -23,6 +25,9 @@ public class Test {
 		Trajet trajet1 = new Trajet("Lille", "Paris", null, 3, membre1,"Supercar", true, null);
 		
 		System.out.println(trajet1);
+		
+		System.out.println(trajet1.hasConducteur());
+
 
 	}
 

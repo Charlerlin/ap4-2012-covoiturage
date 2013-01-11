@@ -14,11 +14,17 @@ public class DatabaseMembre {
 	}
 	
 	public Membre rechercheMembre(String pseudo){
-		//TODO
+		for(Membre m : listeMembres){
+			if(pseudo.equalsIgnoreCase(m.getPseudo()))
+				return m;
+		}
 		return null;
 	}
 	public Membre rechercherMembre(String nom){
-		//TODO
+		for(Membre m : listeMembres){
+			if(nom.equalsIgnoreCase(m.getNom()))
+				return m;
+		}
 		return null;
 	}
 

@@ -1,7 +1,6 @@
 package trajet;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import org.joda.time.DateTime;
 
@@ -15,13 +14,22 @@ public class DatabaseTrajet {
 	public void addTrajet(Trajet t){
 		listeTrajets.add(t);
 	}
-	
+
 	public ArrayList<Trajet> rechercheTrajet(String villeDepart, 
 			String villeArrivee,
 			DateTime dateDepart,
 			boolean avecConducteur){
-		//TODO
-		return null;
+		ArrayList<Trajet> resultat = new ArrayList<Trajet>();
+
+		for(Trajet t : listeTrajets){
+			if(villeDepart.equalsIgnoreCase(t.getVilleDepart()) &&
+					villeArrivee.equalsIgnoreCase(t.getVilleArrivee()) &&
+					t.dateConcorde(dateDepart) &&
+					avecConducteur==t.hasConducteur()){
+				resultat.add(t);
+			}
+		}
+		return resultat;
 	}
 
 	@Override
@@ -38,4 +46,5 @@ public class DatabaseTrajet {
 		}
 		return retour;
 	}
+
 }
