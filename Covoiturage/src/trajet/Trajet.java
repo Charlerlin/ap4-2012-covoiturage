@@ -1,15 +1,15 @@
 package trajet;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import membre.Membre;
+
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
-
-import membre.Membre;
 
 public class Trajet {
 	protected static int lastID;
@@ -22,15 +22,25 @@ public class Trajet {
 	protected String vehicule;
 	protected boolean placeGrandBagages;
 	protected ArrayList<Membre> passagers;
-	
-	protected static DateTimeFormatterBuilder dtfb;
-	protected static DateTimeFormatter dtf;
-	
+
+	protected static DateTimeFormatter inDTF;
+	protected static DateTimeFormatter outDTF;
+
 	static{
 		lastID=0;
-		dtfb = new DateTimeFormatterBuilder();
-		dtfb.appendLiteral("dd-MM-YYYY HH:mm");
-		dtf = dtfb.toFormatter();
+		inDTF = DateTimeFormat.forPattern("dd-MM-YYYY HH:mm");
+		outDTF = new DateTimeFormatterBuilder()
+		.appendLiteral("le ")
+		.appendDayOfMonth(2)
+		.appendLiteral(" ")
+		.appendMonthOfYearText()
+		.appendLiteral(" ")
+		.appendYear(4, 4)
+		.appendLiteral(" à ")
+		.appendHourOfDay(2)
+		.appendLiteral("h")
+		.appendMinuteOfHour(2)
+		.toFormatter();
 	}
 
 	/**
@@ -60,7 +70,7 @@ public class Trajet {
 		this.placeGrandBagages = placeBagages;
 		this.passagers = new ArrayList<Membre>();
 	}
-	
+
 	public boolean addPassager(Membre p){
 		if(nbPlaces>passagers.size()){
 			passagers.add(p);
@@ -68,15 +78,17 @@ public class Trajet {
 		}
 		return false;
 	}
-	
-	
+
+
 	public static void main(String[] args) {
 		//Trajet t = Trajet.creerTrajetConducteurConsole(Membre.creerMembreConsole());
 		//System.out.println(t);
 		entrerDateConsole();
-		
+		//DateTime actuelle = new DateTime();
+		//System.out.println(actuelle.toString(outDTF));
+
 	}
-	
+
 	//GETTERS
 	public String getVilleDepart() {
 		return villeDepart;
@@ -108,21 +120,21 @@ public class Trajet {
 		}
 		else
 			retour+=", en recherche de conducteur.";
-		
+
 		return retour;
 	}
-	
+
 	public static Trajet creerTrajetConducteurConsole(Membre membreCourant){
 		System.out.println("Créatin d'un nouveau trajet en tant que conducteur.");
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.print("Ville de départ : ");
 		String villeDepart = sc.nextLine();
 		System.out.print("Ville d'arrivée : ");
 		String villeArrivee = sc.nextLine();
 		System.out.print("Date de départ (jj/mm/aaaa) : ");
-		String dateDepart = sc.nextLine();
-		// TODO parser la date
+		DateTime dateDepart = entrerDateConsole();
+
 		int nbPlaces=0;
 		boolean nbPlaceOK = false;
 		while(!nbPlaceOK){
@@ -137,9 +149,9 @@ public class Trajet {
 				//sc = new Scanner(System.in);
 				sc.nextLine();
 			}
-			
+
 		}
-		
+
 		System.out.print("Véhicule : ");
 		String vehicule = sc.nextLine();
 		System.out.print("Acceptez vous les grands bagages ? (o/n) : ");
@@ -156,9 +168,9 @@ public class Trajet {
 		else{
 			placeBagages = false;
 		}
-		
-		Trajet t = new Trajet(villeDepart, villeArrivee, null, nbPlaces, membreCourant, vehicule, placeBagages, null);
-		
+
+		Trajet t = new Trajet(villeDepart, villeArrivee, dateDepart, nbPlaces, membreCourant, vehicule, placeBagages, null);
+
 		return t;
 	}
 
@@ -166,43 +178,53 @@ public class Trajet {
 	public static Trajet creerTrajetSouhaitConsole(Membre membreCourant){
 		System.out.println("Créatin d'un nouveau trajet en tant que passager.");
 		Scanner sc = new Scanner(System.in);
-		
+
 		System.out.print("Ville de départ : ");
 		String villeDepart = sc.nextLine();
 		System.out.print("Ville d'arrivée : ");
 		String villeArrivee = sc.nextLine();
 		System.out.print("Date de départ souhaitée (jj/mm/aaaa) : ");
-		String dateDepart = sc.nextLine();
-		
-		//TODO parser la date
-		
+		DateTime dateDepart = entrerDateConsole();
+
 		ArrayList<Membre> passagers = new ArrayList<Membre>();
 		passagers.add(membreCourant);
-		
-		Trajet t = new Trajet(villeDepart, villeArrivee, null, 0, null, "", false, passagers);
-		
+
+		Trajet t = new Trajet(villeDepart, villeArrivee, dateDepart, 0, null, "", false, passagers);
+
 		return t;
 	}
-	
+
 	protected static DateTime entrerDateConsole(){
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Entrer la date de départ souhaitée (jj-mm-aaaa) : ");
-		String date = sc.nextLine();
-		System.out.print("Entrer l'heure de départ souhaitée (hh:mm) : ");
-		String heure = sc.nextLine();
-		
-		String strHoraire = date+" "+heure;
-		
-		DateTimeFormatterBuilder dtfb2 = new DateTimeFormatterBuilder();
-		dtfb2.appendLiteral("dd-MM-YYYY HH:mm");
-		DateTimeFormatter dtf2 = dtfb2.toFormatter();
+		DateTime horaire = null;
+		boolean dateOK = false;
+		boolean dateFormatOK = false;
+		while(!dateOK){
+			while(!dateFormatOK){
+				System.out.print("Entrer la date de départ souhaitée (jj-mm-aaaa) : ");
+				String date = sc.nextLine();
+				System.out.print("Entrer l'heure de départ souhaitée (hh:mm) : ");
+				String heure = sc.nextLine();
+				String strHoraire = date+" "+heure;
 
-		DateTime horaire = DateTime.parse(strHoraire, dtf2);
-		
-		System.out.println(horaire.toString(dtf2));
-		
+				try{
+					horaire = DateTime.parse(strHoraire, inDTF);
+					dateFormatOK = true;
+				}
+				catch(IllegalArgumentException e){
+					System.out.println("Le couple date et heure entré n'est pas valide, merci de respecter le format.");
+				}
+			}
+			if(horaire.isAfterNow()){
+				dateOK = true;
+			}
+			else{
+				System.out.println("Le couple date et heure entré n'est pas valide, merci d'entrer une date postérieure à la date actuelle.");
+				dateFormatOK = false;
+			}
+		}
 		return horaire;
 	}
-	
-	
+
+
 }
