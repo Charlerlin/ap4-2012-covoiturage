@@ -82,36 +82,18 @@ public class Covoiturage {
 			System.out.println("profil\t\t(p)\tAfficher ou éditer le profil.");
 			System.out.println("quitter\t\t(q)\tQuitter.");
 		}
+		//Début des options du menu
 		if (choix.equals("c") || choix.equals("creer")) {
-			System.out.println("Vous êtes conducteur et proposez un trajet, tapez 'a'.");
-			System.out.println("Vous êtes passagez et recherchez un trajet, tapez 's'.");
-			System.out.print(">>");
-			choix = sc.nextLine();
-			if(choix.equals("a")){
-				Trajet t = Trajet.creerTrajetConducteurConsole(membreCourant);
-				dbT.addTrajet(t);
-			}
-			if(choix.equals("s")){
-				ajoutTrajetSansConducteur();
-			}
+			creationTrajetMenu();
 		}
-		if (choix.equals("r") || choix.equals("rechercher")) { //TODO
-			System.out.println("Entrez les détails du trajet, nous recherchons les trajets similaires");
-			Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
-			boolean avecConducteur = false;
-			ArrayList<Trajet> trajets = dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur);
+		if (choix.equals("r") || choix.equals("rechercher")) { 
+			rechercherTrajetMenu();
 		}
 		if (choix.equals("a") || choix.equals("afficher")) {
 			System.out.println(dbT.toString());
 		}
 		if (choix.equals("p") || choix.equals("profil")) {
-			System.out.println("Afficher (a) ou éditer (e) le profil ?");
-			System.out.print(">>");
-			choix = sc.nextLine();
-			if (choix.equals("a") || choix.equals("afficher"))
-				System.out.println(membreCourant.toStringLong());
-			if (choix.equals("e") || choix.equals("editer"))
-				membreCourant.editMembreConsole();
+			profilMenu();
 		}
 		if (choix.equals("q") || choix.equals("quitter")) {
 			return true;
@@ -124,6 +106,21 @@ public class Covoiturage {
 		System.out.println("Vous êtes un nouveau membre, merci de vous enregistrer.");
 		return Membre.creerMembreConsole();
 		// TODO verifier si le pseudo n'est pas déjà pris
+	}
+
+	protected static void creationTrajetMenu(){
+		System.out.println("Vous êtes conducteur et proposez un trajet, tapez 'a'.");
+		System.out.println("Vous êtes passagez et recherchez un trajet, tapez 's'.");
+		System.out.print(">>");
+		Scanner sc = new Scanner(System.in);
+		String choix = sc.nextLine();
+		if(choix.equals("a")){
+			Trajet t = Trajet.creerTrajetConducteurConsole(membreCourant);
+			dbT.addTrajet(t);
+		}
+		if(choix.equals("s")){
+			ajoutTrajetSansConducteur();
+		}
 	}
 
 	protected static void ajoutTrajetSansConducteur(){
@@ -165,6 +162,27 @@ public class Covoiturage {
 
 		}
 		// TODO à terminer
+	}
+
+	protected static void rechercherTrajetMenu(){
+		System.out.println("Entrez les détails du trajet, nous recherchons les trajets similaires");
+		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
+		boolean avecConducteur = false;
+		ArrayList<Trajet> trajets = dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur);
+		
+		//TODO à terminer
+	}
+
+	protected static void profilMenu(){
+		System.out.println("Afficher (a) ou éditer (e) le profil ?");
+		System.out.print(">>");
+		Scanner sc = new Scanner(System.in);
+		String choix = sc.nextLine();
+		choix = sc.nextLine();
+		if (choix.equals("a") || choix.equals("afficher"))
+			System.out.println(membreCourant.toStringLong());
+		if (choix.equals("e") || choix.equals("editer"))
+			membreCourant.editMembreConsole();
 	}
 
 }
