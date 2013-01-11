@@ -35,20 +35,38 @@ public class Membre {
 		System.out.println(m.toStringLong());
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return pseudo;
-	}
-
 	public String getPseudo() {
 		return pseudo;
 	}
 
 	public String getNom() {
 		return nom;
+	}
+
+	public void editMembreConsole(){
+		System.out.println("Édition du profil (appuyer sur Entrée pour ne pas modifier le champ, sauf pour les préférences)");
+		System.out.println("Votre nom est : "+nom);
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Nouveau téléphone ? ");
+		String tmp = sc.nextLine();
+		if(!tmp.equals(""))
+			telephone = tmp;
+		System.out.print("Nouvel email ? ");
+		tmp = sc.nextLine();
+		if(!tmp.equals(""))
+			email = tmp;
+		preferences = Preferences.creerPrefConsole();
+		
+		System.out.println("Voici votre profil :\n"+toStringLong());
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return pseudo;
 	}
 
 	public String toStringLong() {
@@ -71,23 +89,5 @@ public class Membre {
 		
 		Membre m = new Membre(pseudo, nom, email, tel, prefs);
 		return m;
-	}
-	
-	public void editMembreConsole(){
-		System.out.println("Édition du profil (appuyer sur Entrée pour ne pas modifier le champ, sauf pour les préférences)");
-		System.out.println("Votre nom est : "+nom);
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Nouveau téléphone ? ");
-		String tmp = sc.nextLine();
-		if(!tmp.equals(""))
-			telephone = tmp;
-		System.out.print("Nouvel email ? ");
-		tmp = sc.nextLine();
-		if(!tmp.equals(""))
-			email = tmp;
-		preferences = Preferences.creerPrefConsole();
-		
-		System.out.println("Voici votre profil :\n"+toStringLong());
-		
 	}
 }

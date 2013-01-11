@@ -71,15 +71,6 @@ public class Trajet {
 		this.passagers = new ArrayList<Membre>();
 	}
 
-	public boolean addPassager(Membre p){
-		if(nbPlaces>passagers.size()){
-			passagers.add(p);
-			return true;
-		}
-		return false;
-	}
-
-
 	public static void main(String[] args) {
 		//Trajet t = Trajet.creerTrajetConducteurConsole(Membre.creerMembreConsole());
 		//System.out.println(t);
@@ -100,6 +91,14 @@ public class Trajet {
 
 	public DateTime getDateDepart() {
 		return dateDepart;
+	}
+
+	public boolean addPassager(Membre p){
+		if(nbPlaces>passagers.size()){
+			passagers.add(p);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -132,7 +131,7 @@ public class Trajet {
 		String villeDepart = sc.nextLine();
 		System.out.print("Ville d'arrivée : ");
 		String villeArrivee = sc.nextLine();
-		System.out.print("Date de départ (jj/mm/aaaa) : ");
+		System.out.println("Sasie de l'heure et de la date de départ : ");
 		DateTime dateDepart = entrerDateConsole();
 
 		int nbPlaces=0;
@@ -183,7 +182,7 @@ public class Trajet {
 		String villeDepart = sc.nextLine();
 		System.out.print("Ville d'arrivée : ");
 		String villeArrivee = sc.nextLine();
-		System.out.print("Date de départ souhaitée (jj/mm/aaaa) : ");
+		System.out.println("Saisie de la date et de l'heure de départ souhaitée : ");
 		DateTime dateDepart = entrerDateConsole();
 
 		ArrayList<Membre> passagers = new ArrayList<Membre>();
@@ -201,9 +200,9 @@ public class Trajet {
 		boolean dateFormatOK = false;
 		while(!dateOK){
 			while(!dateFormatOK){
-				System.out.print("Entrer la date de départ souhaitée (jj-mm-aaaa) : ");
+				System.out.print("Entrer la date de départ (jj-mm-aaaa) : ");
 				String date = sc.nextLine();
-				System.out.print("Entrer l'heure de départ souhaitée (hh:mm) : ");
+				System.out.print("Entrer l'heure de départ (hh:mm) : ");
 				String heure = sc.nextLine();
 				String strHoraire = date+" "+heure;
 

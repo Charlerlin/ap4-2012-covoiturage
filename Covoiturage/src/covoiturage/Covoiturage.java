@@ -132,7 +132,7 @@ public class Covoiturage {
 		if(trajets.size()==0){
 			dbT.addTrajet(t);
 			System.out.println("Aucun trajet avec conducteur ne correspond à votre recherche.");
-			System.out.println("Votre souhait de trajet est bien enregistré, nous vous contacterons dès qu'un conducteur proposera un trajet similaire.");
+			System.out.println("Votre souhait de trajet est bien enregistré.");
 		}
 		else{
 			int i = 0;
