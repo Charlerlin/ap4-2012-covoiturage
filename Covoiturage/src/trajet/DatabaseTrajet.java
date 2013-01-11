@@ -3,6 +3,8 @@ package trajet;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import org.joda.time.DateTime;
+
 public class DatabaseTrajet {
 	protected ArrayList<Trajet> listeTrajets;
 
@@ -16,7 +18,7 @@ public class DatabaseTrajet {
 	
 	public ArrayList<Trajet> rechercheTrajet(String villeDepart, 
 			String villeArrivee,
-			GregorianCalendar dateDepart,
+			DateTime dateDepart,
 			boolean avecConducteur){
 		//TODO
 		return null;

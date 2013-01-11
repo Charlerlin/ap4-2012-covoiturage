@@ -6,6 +6,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 
 import membre.Membre;
 
@@ -21,8 +23,14 @@ public class Trajet {
 	protected boolean placeGrandBagages;
 	protected ArrayList<Membre> passagers;
 	
+	protected static DateTimeFormatterBuilder dtfb;
+	protected static DateTimeFormatter dtf;
+	
 	static{
 		lastID=0;
+		dtfb = new DateTimeFormatterBuilder();
+		dtfb.appendLiteral("dd-MM-YYYY HH:mm");
+		dtf = dtfb.toFormatter();
 	}
 
 	/**
@@ -63,8 +71,10 @@ public class Trajet {
 	
 	
 	public static void main(String[] args) {
-		Trajet t = Trajet.creerTrajetConducteurConsole(Membre.creerMembreConsole());
-		System.out.println(t);
+		//Trajet t = Trajet.creerTrajetConducteurConsole(Membre.creerMembreConsole());
+		//System.out.println(t);
+		entrerDateConsole();
+		
 	}
 	
 	//GETTERS
@@ -183,12 +193,15 @@ public class Trajet {
 		
 		String strHoraire = date+" "+heure;
 		
-		DateTime horaire = new DateTime();
+		DateTimeFormatterBuilder dtfb2 = new DateTimeFormatterBuilder();
+		dtfb2.appendLiteral("dd-MM-YYYY HH:mm");
+		DateTimeFormatter dtf2 = dtfb2.toFormatter();
+
+		DateTime horaire = DateTime.parse(strHoraire, dtf2);
 		
-		horaire.parse(strHoraire, "dd-MM-YYYY HH:mm");
+		System.out.println(horaire.toString(dtf2));
 		
-		
-		return null;
+		return horaire;
 	}
 	
 	
