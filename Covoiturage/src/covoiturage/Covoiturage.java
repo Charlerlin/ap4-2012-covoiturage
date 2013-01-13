@@ -43,8 +43,19 @@ public class Covoiturage {
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Connexion au système.");
-		System.out.print("Entrez votre pseudo : ");
-		String pseudo = sc.nextLine();
+		
+		boolean pseudoOK = false;
+		String pseudo = "";
+		while(!pseudoOK){
+			System.out.print("Entrez votre pseudo : ");
+			pseudo = sc.nextLine();
+			if(pseudo.isEmpty()){
+				System.out.println("Le champ nom ne peut être vide, recommencez.");
+			}
+			else{
+				pseudoOK = true;
+			}
+		}
 
 		Membre m = dbM.rechercherMembrePseudo(pseudo);
 
@@ -58,6 +69,11 @@ public class Covoiturage {
 			membreCourant = inscription(pseudo);
 		}
 
+	}
+
+	protected static Membre inscription(String pseudo) {
+		System.out.println("Vous êtes un nouveau membre, merci de vous enregistrer.");
+		return Membre.creerMembreConsole(pseudo);
 	}
 
 	protected static boolean menuPrincipal(boolean prems) {
@@ -90,11 +106,6 @@ public class Covoiturage {
 		}
 
 		return false;
-	}
-
-	protected static Membre inscription(String pseudo) {
-		System.out.println("Vous êtes un nouveau membre, merci de vous enregistrer.");
-		return Membre.creerMembreConsole(pseudo);
 	}
 
 	protected static void menuTrajets(){
