@@ -13,19 +13,28 @@ public class DatabaseMembre {
 		listeMembres.add(m);
 	}
 	
-	public Membre rechercheMembre(String pseudo){
+	public Membre rechercherMembrePseudo(String pseudo){
 		for(Membre m : listeMembres){
 			if(pseudo.equalsIgnoreCase(m.getPseudo()))
 				return m;
 		}
 		return null;
 	}
-	public Membre rechercherMembre(String nom){
+	public Membre rechercherMembreNom(String nom){
 		for(Membre m : listeMembres){
 			if(nom.equalsIgnoreCase(m.getNom()))
 				return m;
 		}
 		return null;
+	}
+	
+	public ArrayList<Membre> rechercherMembresNom(String nom){
+		ArrayList<Membre> retour = new ArrayList<Membre>();
+		for(Membre m : listeMembres){
+			if(nom.equalsIgnoreCase(m.getNom()))
+				retour.add(m);
+		}
+		return retour;
 	}
 
 	@Override

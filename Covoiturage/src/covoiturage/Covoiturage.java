@@ -46,7 +46,7 @@ public class Covoiturage {
 		System.out.print("Entrez votre pseudo : ");
 		String pseudo = sc.nextLine();
 
-		Membre m = dbM.rechercheMembre(pseudo);
+		Membre m = dbM.rechercherMembrePseudo(pseudo);
 
 		// POUR TEST UNIQUEMENT TODO à supprimer pour fonctionnement normal
 		Preferences preferences = new Preferences();
@@ -62,39 +62,29 @@ public class Covoiturage {
 
 	protected static boolean menuPrincipal(boolean prems) {
 		if (prems) {
-			System.out
-			.println("Tapez 'aide' pour voir le détail des commandes.");
-			System.out
-			.println("Commandes disponibles : creer, rechercher, afficher, profil, aide (h), quitter.");
+			System.out.println("Tapez 'aide' pour voir le détail des commandes.");
+			System.out.println("Commandes disponibles : trajets, membre, aide (?), quitter.");
 			System.out.println("Que voulez vous faire ?");
 		}
 		System.out.print(">");
 		Scanner sc = new Scanner(System.in);
 		String choix = sc.nextLine();
 
-		if (choix.equals("h") || choix.equals("aide")) {
-			System.out
-			.println("Aide sur les commandes.\nLes commandes sont indiquées en début de ligne et le raccourci entre parenthèses.");
-			System.out.println("aide\t\t(h)\tAfficher cette aide.");
-			System.out.println("creer\t\t(c)\tCréer un nouveau trajet.");
-			System.out.println("rechercher\t(r)\tRechercher un trajet.");
-			System.out.println("afficher\t(a)\tAfficher tous les trajts.");
-			System.out.println("profil\t\t(p)\tAfficher ou éditer le profil.");
+		if (choix.equals("?") || choix.equals("aide")) {
+			System.out.println("Aide sur les commandes.\nLes commandes sont indiquées en début de ligne et le raccourci entre parenthèses.");
+			System.out.println("aide\t\t(?)\tAfficher cette aide.");
+			System.out.println("trajets\t\t(t)\tAccéder au menu Trajets.");
+			System.out.println("membre\t\t(m)\tAccéder au menu Membre.");
 			System.out.println("quitter\t\t(q)\tQuitter.");
 		}
 		//Début des options du menu
-		if (choix.equals("c") || choix.equals("creer")) {
-			creationTrajetMenu();
+		if(choix.equals("t") || choix.equals("trajets")){
+			menuTrajets();
 		}
-		if (choix.equals("r") || choix.equals("rechercher")) { 
-			rechercherTrajetMenu();
+		if(choix.equals("m") || choix.equals("membre")){
+			menuMembre();
 		}
-		if (choix.equals("a") || choix.equals("afficher")) {
-			System.out.println(dbT.toString());
-		}
-		if (choix.equals("p") || choix.equals("profil")) {
-			profilMenu();
-		}
+
 		if (choix.equals("q") || choix.equals("quitter")) {
 			return true;
 		}
@@ -105,10 +95,34 @@ public class Covoiturage {
 	protected static Membre inscription(String pseudo) {
 		System.out.println("Vous êtes un nouveau membre, merci de vous enregistrer.");
 		return Membre.creerMembreConsole(pseudo);
-		// TODO verifier si le pseudo n'est pas déjà pris
 	}
 
-	protected static void creationTrajetMenu(){
+	protected static void menuTrajets(){
+		System.out.println("Menu Trajets. Tapez 'aide' pour voir le détail des commandes.");
+		System.out.println("Commandes disponibles : creer, rechercher, afficher, aide.");
+		System.out.print(">>");
+		Scanner sc = new Scanner(System.in);
+		String choix = sc.nextLine();
+
+		if (choix.equals("?") || choix.equals("aide")) {
+			System.out.println("aide\t\t(?)\tAfficher cette aide.");
+			System.out.println("creer\t\t(c)\tAccéder au menu de création de trajet.");
+			System.out.println("rechercher\t(r)\tAccéder au menu de recherche.");
+			System.out.println("afficher\t(a)\tAfficher tous les trajets.");
+		}
+		//Début des options du menu
+		if(choix.equals("c") || choix.equals("creer")){
+			menuCreationTrajet();
+		}
+		if(choix.equals("r") || choix.equals("rechercher")){
+			menuRechercherTrajet();
+		}
+		if(choix.equals("a") || choix.equals("afficher")){
+			System.out.println(dbT.toString());
+		}
+	}
+
+	protected static void menuCreationTrajet(){
 		System.out.println("Vous êtes conducteur et proposez un trajet, tapez 'a'.");
 		System.out.println("Vous êtes passagez et recherchez un trajet, tapez 's'.");
 		System.out.print(">>");
@@ -121,6 +135,15 @@ public class Covoiturage {
 		if(choix.equals("s")){
 			ajoutTrajetSansConducteur();
 		}
+	}
+
+	protected static void menuRechercherTrajet(){
+		System.out.println("Entrez les détails du trajet, nous recherchons les trajets similaires");
+		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
+		boolean avecConducteur = false;
+		ArrayList<Trajet> trajets = dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur);
+
+		//TODO à terminer
 	}
 
 	protected static void ajoutTrajetSansConducteur(){
@@ -164,22 +187,66 @@ public class Covoiturage {
 		// TODO à terminer
 	}
 
-	protected static void rechercherTrajetMenu(){
-		System.out.println("Entrez les détails du trajet, nous recherchons les trajets similaires");
-		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
-		boolean avecConducteur = false;
-		ArrayList<Trajet> trajets = dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur);
-		
-		//TODO à terminer
-	}
-
-	protected static void profilMenu(){
-		System.out.println("Afficher (a) ou éditer (e) le profil ?");
+	protected static void menuMembre(){
+		System.out.println("Menu Trajets. Tapez 'aide' pour voir le détail des commandes.");
+		System.out.println("Commandes disponibles : rechercher, modifier, afficher, aide.");
 		System.out.print(">>");
 		Scanner sc = new Scanner(System.in);
 		String choix = sc.nextLine();
-		choix = sc.nextLine();
+
+		if (choix.equals("?") || choix.equals("aide")) {
+			System.out.println("aide\t\t(?)\tAfficher cette aide.");
+			System.out.println("rechercher\t(r)\tRechercher un membre par pseudo ou par profil.");
+			System.out.println("modifier\t(m)\tAfficher et/ou modifier votre profil.");
+			System.out.println("afficher\t(a)\tAfficher tous les trajets.");
+			System.out.print(">>");
+			choix = sc.nextLine();
+		}
+		//Début des options du menu
+		if(choix.equals("r") || choix.equals("rechercher")){
+			rechercheMembre();
+		}
+		if(choix.equals("m") || choix.equals("modifier")){
+			menuModifierMembre();
+		}
+		if(choix.equals("a") || choix.equals("afficher")){
+			System.out.println(dbM.toString());
+		}
+	}
+
+
+	protected static void rechercheMembre(){
+		System.out.println("Entrez le nom ou le pseudo du membre que vous recherchez.");
+		System.out.print(">>>");
+		Scanner sc = new Scanner(System.in);
+		String entry = sc.nextLine();
+		
+		Membre resPseudo = dbM.rechercherMembrePseudo(entry);
+		ArrayList<Membre> resNom = dbM.rechercherMembresNom(entry);
+		
+		if(resPseudo==null && resNom.size()==0){
+			System.out.println("Votre recherche n'a renvoyé aucun résultat");
+		}
+		else{
+			if(resPseudo==null)
+				System.out.println("Aucun membre ne porte le pseudo : '"+entry+"'.");
+			else
+				System.out.println("Résultat de la recherche par pseudo : \n"+resPseudo.toStringLong());
+			if(resNom.size()!=0){
+				System.out.println("Résulat de la recherche de membres dont le nom est '"+entry+"'.");
+				System.out.println(resNom);
+			}
+		}
+		// TODO
+	}
+	
+	protected static void menuModifierMembre(){
+		System.out.println("Afficher (a) ou éditer (e) le profil ?");
+		System.out.print(">>>");
+		Scanner sc = new Scanner(System.in);
+		String choix = sc.nextLine();
 		if (choix.equals("a") || choix.equals("afficher"))
+			System.out.println("Voici votre profil : ");
 			System.out.println(membreCourant.toStringLong());
 		if (choix.equals("e") || choix.equals("editer"))
 			membreCourant.editMembreConsole();
