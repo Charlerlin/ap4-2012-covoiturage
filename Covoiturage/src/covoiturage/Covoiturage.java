@@ -55,7 +55,7 @@ public class Covoiturage {
 		if (m != null) {
 			membreCourant = m;
 		} else {
-			membreCourant = inscription();
+			membreCourant = inscription(pseudo);
 		}
 
 	}
@@ -102,9 +102,9 @@ public class Covoiturage {
 		return false;
 	}
 
-	protected static Membre inscription() {
+	protected static Membre inscription(String pseudo) {
 		System.out.println("Vous êtes un nouveau membre, merci de vous enregistrer.");
-		return Membre.creerMembreConsole();
+		return Membre.creerMembreConsole(pseudo);
 		// TODO verifier si le pseudo n'est pas déjà pris
 	}
 

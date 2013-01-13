@@ -27,9 +27,10 @@ public class Membre {
 		this.telephone = telephone;
 		this.preferences = preferences;
 	}
-	
+
 	public static void main(String[] args) {
-		Membre m = Membre.creerMembreConsole();
+		String pseudo = "Tintin";
+		Membre m = Membre.creerMembreConsole(pseudo);
 		System.out.println(m.toStringLong());
 		m.editMembreConsole();
 		System.out.println(m.toStringLong());
@@ -45,20 +46,21 @@ public class Membre {
 
 	public void editMembreConsole(){
 		System.out.println("Édition du profil (appuyer sur Entrée pour ne pas modifier le champ, sauf pour les préférences)");
-		System.out.println("Votre nom est : "+nom);
+		System.out.println("Votre téléphone actuel est : "+telephone);
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Nouveau téléphone ? ");
 		String tmp = sc.nextLine();
 		if(!tmp.equals(""))
 			telephone = tmp;
+		System.out.println("Votre email actuel est : "+email);
 		System.out.print("Nouvel email ? ");
 		tmp = sc.nextLine();
 		if(!tmp.equals(""))
 			email = tmp;
 		preferences = Preferences.creerPrefConsole();
-		
+
 		System.out.println("Voici votre profil :\n"+toStringLong());
-		
+
 	}
 
 	/* (non-Javadoc)
@@ -73,20 +75,40 @@ public class Membre {
 		return "Membre : "+pseudo+", nom : "+nom+", email : "+email+", telephone : "+telephone+", preferences : "+preferences;
 	}
 
-	public static Membre creerMembreConsole(){
+	public static Membre creerMembreConsole(String pseudo){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Création d'un nouveau membre.");
-		System.out.print("Pseudo : ");
-		String pseudo = sc.nextLine();
-		System.out.print("Nom : ");
-		String nom = sc.nextLine();
-		System.out.print("Email : ");
-		String email = sc.nextLine();
-		System.out.print("Telephone : ");
-		String tel = sc.nextLine();
+
+		boolean nomOK = false;
+		String nom = "";
+		while(!nomOK){
+			System.out.print("Nom : ");
+			nom = sc.nextLine();
+			if(nom.isEmpty()){
+				System.out.println("Le champ nom ne peut être vide, recommencez.");
+			}
+			else{
+				nomOK = true;
+			}
+		}
+		boolean coordOK = false;
+		String email = ""; 
+		String tel = "";
+		while(!coordOK){
+			System.out.print("Email : ");
+			email = sc.nextLine();
+			System.out.print("Telephone : ");
+			tel = sc.nextLine();
+			if(email.isEmpty() && tel.isEmpty()){
+				System.out.println("Vous devez renseigner au moins une coordonnée, recommencez.");
+			}
+			else{
+				coordOK = true;
+			}
+		}
 		System.out.println("Choisissez vos préférences : ");
 		Preferences prefs= Preferences.creerPrefConsole();
-		
+
 		Membre m = new Membre(pseudo, nom, email, tel, prefs);
 		return m;
 	}
