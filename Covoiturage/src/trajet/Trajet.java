@@ -109,7 +109,7 @@ public class Trajet {
 		}
 		return false;
 	}
-	
+
 	public boolean dateConcorde(DateTime d){
 		if(dateDepart.minusHours(4).isBefore(d) && dateDepart.plusHours(4).isAfter(d))
 			return true;
@@ -118,7 +118,7 @@ public class Trajet {
 
 	@Override
 	public String toString() {
-		String retour = "Trajet n°"+id+" de "+villeDepart+" à "+villeArrivee+", départ le "+dateDepart;
+		String retour = "Trajet n°"+id+" de "+villeDepart+" à "+villeArrivee+", départ "+dateDepart.toString(outDTF);
 		if(nbPlaces>=passagers.size())
 			retour+=", "+(nbPlaces-passagers.size())+" places disponibles";
 		else
@@ -144,7 +144,7 @@ public class Trajet {
 
 		String villeDepart = Covoiturage.entreeNonVide("Ville de départ : ");
 		String villeArrivee = Covoiturage.entreeNonVide("Ville d'arrivée : ");
-		
+
 		System.out.println("Sasie de l'heure et de la date de départ : ");
 		DateTime dateDepart = entrerDateConsole();
 
@@ -191,7 +191,7 @@ public class Trajet {
 
 		String villeDepart = Covoiturage.entreeNonVide("Ville de départ : ");
 		String villeArrivee = Covoiturage.entreeNonVide("Ville d'arrivée : ");
-		
+
 		System.out.println("Saisie de la date et de l'heure de départ souhaitée : ");
 		DateTime dateDepart = entrerDateConsole();
 
@@ -231,6 +231,18 @@ public class Trajet {
 				System.out.println("Le couple date et heure entré n'est pas valide, merci d'entrer une date postérieure à la date actuelle.");
 				dateFormatOK = false;
 			}
+		}
+		return horaire;
+	}
+
+	//A des fins utilitaires uniquement
+	public static DateTime genererDateTime(String str){
+		DateTime horaire = null;
+		try{
+			horaire = DateTime.parse(str, inDTF);
+		}
+		catch(IllegalArgumentException e){
+			e.printStackTrace();
 		}
 		return horaire;
 	}

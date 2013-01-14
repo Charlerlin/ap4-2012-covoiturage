@@ -5,14 +5,18 @@ import java.util.ArrayList;
 public class DatabaseMembre {
 	protected ArrayList<Membre> listeMembres;
 	
+	public static void main(String[] args) {
+		
+	}
+
 	public DatabaseMembre(){
 		listeMembres = new ArrayList<Membre>();
 	}
-	
+
 	public void addMembre(Membre m){
 		listeMembres.add(m);
 	}
-	
+
 	public Membre rechercherMembrePseudo(String pseudo){
 		for(Membre m : listeMembres){
 			if(pseudo.equalsIgnoreCase(m.getPseudo()))
@@ -27,7 +31,7 @@ public class DatabaseMembre {
 		}
 		return null;
 	}
-	
+
 	public ArrayList<Membre> rechercherMembresNom(String nom){
 		ArrayList<Membre> retour = new ArrayList<Membre>();
 		for(Membre m : listeMembres){
@@ -45,6 +49,6 @@ public class DatabaseMembre {
 		}
 		return retour;
 	}
-	
-	
+
+
 }

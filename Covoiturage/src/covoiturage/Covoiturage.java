@@ -26,6 +26,7 @@ public class Covoiturage {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		ajoutFaux();
 		menuConnexion();
 		System.out.println("\nBonjour " + membreCourant.getNom() + ".\n");
 		boolean quitter = false;
@@ -43,10 +44,6 @@ public class Covoiturage {
 		String pseudo = entreeNonVide("Entrez votre pseudo : ");
 		Membre m = dbM.rechercherMembrePseudo(pseudo);
 
-		// POUR TEST UNIQUEMENT TODO à supprimer pour fonctionnement normal
-		Preferences preferences = new Preferences();
-		m = new Membre("supercharles", "Charles", "charles@mail.com", "06", preferences);
-		//
 		if (m != null) {
 			membreCourant = m;
 		} else {
@@ -185,7 +182,7 @@ public class Covoiturage {
 	}
 
 	protected static void menuMembre(){
-		System.out.println("Menu Trajets. Tapez 'aide' pour voir le détail des commandes.");
+		System.out.println("Menu Membres. Tapez 'aide' pour voir le détail des commandes.");
 		System.out.println("Commandes disponibles : rechercher, modifier, afficher, aide.");
 		System.out.print(">>");
 		Scanner sc = new Scanner(System.in);
@@ -259,5 +256,23 @@ public class Covoiturage {
 				System.out.println("Le champ ne peut être vide, recommencez.");
 		}
 		return retour;
+	}
+
+	protected static void ajoutFaux(){
+		Preferences preferences = new Preferences();
+		
+		Membre jecree = new Membre("charles", "Charles Herlin", "charles@mail.com", "06", preferences);
+		dbM.addMembre(jecree);
+		jecree = new Membre("supermenteur", "Jacques Chirac", "jchirac@laposte.net", "0681851515", preferences);
+		dbM.addMembre(jecree);
+		jecree = new Membre("nainposteur", "Nicolas Sarkozy", "contact@nicolas-sarkozy-2017.fr", "06548151", preferences);
+		dbM.addMembre(jecree);
+		jecree = new Membre("mecnormal", "Francois Hollande", "contact@elysee.fr", "06518115158", preferences);
+		dbM.addMembre(jecree);
+		jecree = new Membre("bleumarine", "Marine Le Pen", "contact@lepen2002-7-12-17.fr", "0651845458", preferences);
+		dbM.addMembre(jecree);
+		
+		Trajet t = new Trajet("Lille", "Paris", Trajet.genererDateTime("16-01-2013 08:20"), 3, dbM.rechercherMembrePseudo("charles"), "Clio", true, null);
+		dbT.addTrajet(t);
 	}
 }
