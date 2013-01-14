@@ -2,6 +2,8 @@ package membre;
 
 import java.util.Scanner;
 
+import covoiturage.Covoiturage;
+
 
 public class Membre {
 	protected String pseudo;
@@ -79,18 +81,8 @@ public class Membre {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Création d'un nouveau membre.");
 
-		boolean nomOK = false;
-		String nom = "";
-		while(!nomOK){
-			System.out.print("Nom : ");
-			nom = sc.nextLine();
-			if(nom.isEmpty()){
-				System.out.println("Le champ nom ne peut être vide, recommencez.");
-			}
-			else{
-				nomOK = true;
-			}
-		}
+		String nom = Covoiturage.entreeNonVide("Nom : ");
+		
 		boolean coordOK = false;
 		String email = ""; 
 		String tel = "";

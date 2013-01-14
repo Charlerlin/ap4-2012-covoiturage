@@ -11,6 +11,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 
+import covoiturage.Covoiturage;
+
 public class Trajet {
 	protected static int lastID;
 	protected int id;
@@ -140,10 +142,9 @@ public class Trajet {
 		System.out.println("Créatin d'un nouveau trajet en tant que conducteur.");
 		Scanner sc = new Scanner(System.in);
 
-		System.out.print("Ville de départ : ");
-		String villeDepart = sc.nextLine();
-		System.out.print("Ville d'arrivée : ");
-		String villeArrivee = sc.nextLine();
+		String villeDepart = Covoiturage.entreeNonVide("Ville de départ : ");
+		String villeArrivee = Covoiturage.entreeNonVide("Ville d'arrivée : ");
+		
 		System.out.println("Sasie de l'heure et de la date de départ : ");
 		DateTime dateDepart = entrerDateConsole();
 
@@ -158,14 +159,12 @@ public class Trajet {
 			}
 			catch(InputMismatchException e){
 				System.out.println("L'entrée n'est pas correcte, merci d'entrer un nombre (sans espaces)");
-				//sc = new Scanner(System.in);
 				sc.nextLine();
 			}
 
 		}
 
-		System.out.print("Véhicule : ");
-		String vehicule = sc.nextLine();
+		String vehicule = Covoiturage.entreeNonVide("Véhicule : ");
 		System.out.print("Acceptez vous les grands bagages ? (o/n) : ");
 		String grandBagages = sc.nextLine();
 		while(!(grandBagages.equals("o")||grandBagages.equals("n"))){
@@ -189,12 +188,10 @@ public class Trajet {
 
 	public static Trajet creerTrajetSouhaitConsole(Membre membreCourant){
 		System.out.println("Créatin d'un nouveau trajet en tant que passager.");
-		Scanner sc = new Scanner(System.in);
 
-		System.out.print("Ville de départ : ");
-		String villeDepart = sc.nextLine();
-		System.out.print("Ville d'arrivée : ");
-		String villeArrivee = sc.nextLine();
+		String villeDepart = Covoiturage.entreeNonVide("Ville de départ : ");
+		String villeArrivee = Covoiturage.entreeNonVide("Ville d'arrivée : ");
+		
 		System.out.println("Saisie de la date et de l'heure de départ souhaitée : ");
 		DateTime dateDepart = entrerDateConsole();
 

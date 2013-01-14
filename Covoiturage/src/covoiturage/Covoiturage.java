@@ -29,8 +29,7 @@ public class Covoiturage {
 		menuConnexion();
 		System.out.println("\nBonjour " + membreCourant.getNom() + ".\n");
 		boolean quitter = false;
-		// Ce boolean permet d'afficher la liste des commandes lors du premier
-		// affichage du menu
+		// Ce boolean permet d'afficher la liste des commandes lors du premier affichage du menu
 		boolean prems = true;
 		while (!quitter) {
 			quitter = menuPrincipal(prems);
@@ -40,23 +39,8 @@ public class Covoiturage {
 	}
 
 	protected static void menuConnexion() {
-		Scanner sc = new Scanner(System.in);
-
 		System.out.println("Connexion au système.");
-		
-		boolean pseudoOK = false;
-		String pseudo = "";
-		while(!pseudoOK){
-			System.out.print("Entrez votre pseudo : ");
-			pseudo = sc.nextLine();
-			if(pseudo.isEmpty()){
-				System.out.println("Le champ nom ne peut être vide, recommencez.");
-			}
-			else{
-				pseudoOK = true;
-			}
-		}
-
+		String pseudo = entreeNonVide("Entrez votre pseudo : ");
 		Membre m = dbM.rechercherMembrePseudo(pseudo);
 
 		// POUR TEST UNIQUEMENT TODO à supprimer pour fonctionnement normal
@@ -233,10 +217,10 @@ public class Covoiturage {
 		System.out.print(">>>");
 		Scanner sc = new Scanner(System.in);
 		String entry = sc.nextLine();
-		
+
 		Membre resPseudo = dbM.rechercherMembrePseudo(entry);
 		ArrayList<Membre> resNom = dbM.rechercherMembresNom(entry);
-		
+
 		if(resPseudo==null && resNom.size()==0){
 			System.out.println("Votre recherche n'a renvoyé aucun résultat");
 		}
@@ -252,7 +236,7 @@ public class Covoiturage {
 		}
 		// TODO
 	}
-	
+
 	protected static void menuModifierMembre(){
 		System.out.println("Afficher (a) ou éditer (e) le profil ?");
 		System.out.print(">>>");
@@ -260,9 +244,20 @@ public class Covoiturage {
 		String choix = sc.nextLine();
 		if (choix.equals("a") || choix.equals("afficher"))
 			System.out.println("Voici votre profil : ");
-			System.out.println(membreCourant.toStringLong());
+		System.out.println(membreCourant.toStringLong());
 		if (choix.equals("e") || choix.equals("editer"))
 			membreCourant.editMembreConsole();
 	}
 
+	public static String entreeNonVide(String inviteDeChamp){
+		String retour = "";
+		Scanner sc = new Scanner(System.in);
+		while(retour.isEmpty()){
+			System.out.print(inviteDeChamp);
+			retour = sc.nextLine();
+			if(retour.isEmpty())
+				System.out.println("Le champ ne peut être vide, recommencez.");
+		}
+		return retour;
+	}
 }
