@@ -120,6 +120,8 @@ public class Covoiturage {
 			System.out.println("creer\t\t(c)\tAccéder au menu de création de trajet.");
 			System.out.println("rechercher\t(r)\tAccéder au menu de recherche.");
 			System.out.println("afficher\t(a)\tAfficher tous les trajets.");
+			System.out.print(">>");
+			choix = sc.nextLine();
 		}
 		//Début des options du menu
 		if(choix.equals("c") || choix.equals("creer")){
@@ -144,7 +146,7 @@ public class Covoiturage {
 			dbT.addTrajet(t);
 		}
 		if(choix.equals("s")){
-			ajoutTrajetSansConducteur();
+			ajoutTrajetSansConducteur(); 
 		}
 	}
 
@@ -209,7 +211,7 @@ public class Covoiturage {
 			System.out.println("aide\t\t(?)\tAfficher cette aide.");
 			System.out.println("rechercher\t(r)\tRechercher un membre par pseudo ou par profil.");
 			System.out.println("modifier\t(m)\tAfficher et/ou modifier votre profil.");
-			System.out.println("afficher\t(a)\tAfficher tous les trajets.");
+			System.out.println("afficher\t(a)\tAfficher tous les membres.");
 			System.out.print(">>");
 			choix = sc.nextLine();
 		}
