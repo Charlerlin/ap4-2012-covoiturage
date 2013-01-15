@@ -36,7 +36,7 @@ public class DatabaseMembre {
 		ArrayList<Membre> retour = new ArrayList<Membre>();
 		for(Membre m : listeMembres){
 			//if(nom.equalsIgnoreCase(m.getNom()))
-			if(m.getNom().toLowerCase().indexOf(nom)!=-1)
+			if(m.getNom().toLowerCase().indexOf(nom.toLowerCase())!=-1)
 				retour.add(m);
 		}
 		return retour;
