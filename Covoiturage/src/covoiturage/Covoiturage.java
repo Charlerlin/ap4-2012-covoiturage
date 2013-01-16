@@ -254,7 +254,7 @@ public class Covoiturage {
 	 */
 	protected static void menuMembre(){
 		System.out.println("Menu Membres. Tapez 'aide' pour voir le détail des commandes.");
-		System.out.println("Commandes disponibles : rechercher, modifier, afficher, aide.");
+		System.out.println("Commandes disponibles : rechercher, modifier, trajets, afficher, aide.");
 		System.out.print(">>");
 		Scanner sc = new Scanner(System.in);
 		String choix = sc.nextLine();
@@ -333,6 +333,7 @@ public class Covoiturage {
 		ArrayList<Trajet> resConducteur = dbT.getTrajetByConducteur(m);
 		ArrayList<Trajet> resPassager = dbT.getTrajetsWithPassager(m);
 		
+		System.out.println();
 		if(resConducteur.size()==0 && resPassager.size()==0){
 			System.out.println("Vous ne participez encore à aucun trajet");
 		}
@@ -346,6 +347,7 @@ public class Covoiturage {
 			else{
 				System.out.println("Vous ne participez encore à aucun trajet en tant que conducteur.");
 			}
+			System.out.println();
 			if(resPassager.size()!=0){
 				System.out.println("Vous participez en tant que passager aux trajets suivants : ");
 				for(Trajet tl : resPassager){
@@ -355,6 +357,7 @@ public class Covoiturage {
 			else{
 				System.out.println("Vous ne participez encore à aucun trajet en tant que passager");
 			}
+			System.out.println();
 		}
 	}
 
