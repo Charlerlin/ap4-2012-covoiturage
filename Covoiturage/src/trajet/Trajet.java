@@ -82,6 +82,10 @@ public class Trajet {
 
 	}
 
+	public int getID() {
+		return id;
+	}
+
 	//GETTERS
 	public String getVilleDepart() {
 		return villeDepart;
@@ -101,9 +105,16 @@ public class Trajet {
 	public boolean hasConducteur(){
 		return !(conducteur==null);
 	}
+	
+	public int placesLibres(){
+		return nbPlaces-passagers.size();
+	}
+	public boolean hasPlacesLibres(){
+		return placesLibres()>0;
+	}
 
 	public boolean addPassager(Membre p){
-		if(nbPlaces>passagers.size()){
+		if(hasPlacesLibres()){
 			passagers.add(p);
 			return true;
 		}

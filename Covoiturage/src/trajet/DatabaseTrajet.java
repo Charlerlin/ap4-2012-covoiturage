@@ -18,18 +18,28 @@ public class DatabaseTrajet {
 	public ArrayList<Trajet> rechercheTrajet(String villeDepart, 
 			String villeArrivee,
 			DateTime dateDepart,
-			boolean avecConducteur){
+			boolean avecConducteur,
+			boolean avecPlacesLibres){
 		ArrayList<Trajet> resultat = new ArrayList<Trajet>();
 
 		for(Trajet t : listeTrajets){
 			if(villeDepart.equalsIgnoreCase(t.getVilleDepart()) &&
 					villeArrivee.equalsIgnoreCase(t.getVilleArrivee()) &&
 					t.dateConcorde(dateDepart) &&
-					avecConducteur==t.hasConducteur()){
+					avecConducteur==t.hasConducteur() &&
+					avecPlacesLibres==t.hasPlacesLibres()){
 				resultat.add(t);
 			}
 		}
 		return resultat;
+	}
+	
+	public Trajet getTrajetByID(int id){
+		for(Trajet t : listeTrajets){
+			if(id==t.getID())
+				return t;
+		}
+		return null;
 	}
 
 	@Override
