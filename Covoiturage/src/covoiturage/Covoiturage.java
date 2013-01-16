@@ -10,6 +10,14 @@ import membre.Preferences;
 import trajet.DatabaseTrajet;
 import trajet.Trajet;
 
+/**
+ * @author charlerlin
+ *
+ */
+/**
+ * @author charlerlin
+ *
+ */
 public class Covoiturage {
 
 	protected static DatabaseTrajet dbT;
@@ -22,16 +30,15 @@ public class Covoiturage {
 		dbM = new DatabaseMembre();
 	}
 
-	/**
+	/**Fonction principale du système de covoiturage qui appelle toutes les autres
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		ajoutFaux();
 		menuConnexion();
 		System.out.println("\nBonjour " + membreCourant.getNom() + ".\n");
-		boolean quitter = false;
-		// Ce boolean permet d'afficher la liste des commandes lors du premier affichage du menu
-		boolean prems = true;
+		boolean quitter = false; //boolean permettant de relancer le menu tant que l'uilisateur ne veut pas quitter
+		boolean prems = true; // Ce boolean permet d'afficher la liste des commandes lors du premier affichage du menu
 		while (!quitter) {
 			quitter = menuPrincipal(prems);
 			prems = false;
@@ -39,6 +46,9 @@ public class Covoiturage {
 
 	}
 
+	/**Menu de connexin qui vérifie si le pseudo existe, sinon, invoque la création d'un nouveau membre
+	 * Chargé de la gestion de l'unicité des pseudos
+	 */
 	protected static void menuConnexion() {
 		System.out.println("Connexion au système.");
 		String pseudo = entreeNonVide("Entrez votre pseudo : ");
@@ -52,11 +62,20 @@ public class Covoiturage {
 
 	}
 
+	
+	/**Création d'un nouveau membre, invoque la création d'un membre dans la console
+	 * @param pseudo pseudo unique (normalement) passé en paramètre
+	 * @return un membre avec le pseudo passé en paramètre
+	 */
 	protected static Membre inscription(String pseudo) {
 		System.out.println("Vous êtes un nouveau membre, merci de vous enregistrer.");
 		return Membre.creerMembreConsole(pseudo);
 	}
 
+	/**Menu principal
+	 * @param prems vrai si premier affichage du menu
+	 * @return false si l'utilisateur veut quitter, vrai sinon
+	 */
 	protected static boolean menuPrincipal(boolean prems) {
 		if (prems) {
 			System.out.println("Tapez 'aide' pour voir le détail des commandes.");
@@ -89,6 +108,9 @@ public class Covoiturage {
 		return false;
 	}
 
+	/**Menu principal pour la gestion des trajets
+	 * 
+	 */
 	protected static void menuTrajets(){
 		System.out.println("Menu Trajets. Tapez 'aide' pour voir le détail des commandes.");
 		System.out.println("Commandes disponibles : creer, rechercher, afficher, aide.");
@@ -116,6 +138,9 @@ public class Covoiturage {
 		}
 	}
 
+	/**Menu de création de trajet avec ou sans conducteur qui invoque les méthodes correspondantes en console en passant le membre courant en paramètre
+	 * 
+	 */
 	protected static void menuCreationTrajet(){
 		System.out.println("Vous êtes conducteur et proposez un trajet, tapez 'a'.");
 		System.out.println("Vous êtes passagez et recherchez un trajet, tapez 's'.");
@@ -131,6 +156,9 @@ public class Covoiturage {
 		}
 	}
 
+	/**Menu de recherche de trajet
+	 * 
+	 */
 	protected static void menuRechercherTrajet(){
 		System.out.println("Entrez les détails du trajet, nous recherchons les trajets similaires");
 		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
@@ -152,6 +180,9 @@ public class Covoiturage {
 		System.out.println("Pour vous inscrire en tant que passager dans un trajet ou créer un nouveau souhait de trajet, veuillez passer par le menu Trajet > Ajouter > Sans conducteur.");
 	}
 
+	/**Dialogue console permettant d'ajouter un trajet sans conducteur ou proposant de s'inscrire à un trajet si des trajets correspondants existent déjà
+	 * 
+	 */
 	protected static void ajoutTrajetSansConducteur(){
 		System.out.println("Entrez les détails de votre trajet, nous recherchons un trajet similaire avec conducteur.");
 		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
@@ -208,6 +239,11 @@ public class Covoiturage {
 		// TODO à terminer
 	}
 
+	/**Vérifie si un trajet de la liste fournie porte bien l'id passé en paramètre
+	 * @param n id à rechercher
+	 * @param trajets liste des trajets dans laquelle rechercher
+	 * @return true si le numéro a été trouvé, false sinon
+	 */
 	protected static boolean numeroTrajetOK(int n, ArrayList<Trajet> trajets){
 		for(Trajet t : trajets){
 			if(n==t.getID()){
@@ -217,6 +253,9 @@ public class Covoiturage {
 		return false;
 	}
 
+	/**Dialogue console pour la gestion du membre courant
+	 * 
+	 */
 	protected static void menuMembre(){
 		System.out.println("Menu Membres. Tapez 'aide' pour voir le détail des commandes.");
 		System.out.println("Commandes disponibles : rechercher, modifier, afficher, aide.");
@@ -245,6 +284,9 @@ public class Covoiturage {
 	}
 
 
+	/**Dialogue et mise en forme de la recherche de membre
+	 * Fait appel à la recherche par pseudo (unique) et par correspondance de nom.
+	 */
 	protected static void rechercheMembre(){
 		System.out.println("Entrez le nom ou le pseudo du membre que vous recherchez.");
 		System.out.print(">>>");
@@ -267,11 +309,13 @@ public class Covoiturage {
 				System.out.println("Vous pouvez afficher plus d'informations sur le membre en recherchant directement son pseudo.");
 			}
 		}
-		// TODO
+		// TODO faire l'affichage des trajets auxquels participe le membre, en tant que conducteur et/ou passager.
 	}
 
+	/**Dialogue permettant de choisir entre affichage et édition du membre courant
+	 * appel à la fonction d'édition en console le cas échéant
+	 */
 	protected static void menuModifierMembre(){
-		//TODO faire l'affichage des trajets auxquels participe le membre, en tant que conducteur et/ou passager.
 		System.out.println("Afficher (a) ou éditer (e) le profil ?");
 		System.out.print(">>>");
 		Scanner sc = new Scanner(System.in);
@@ -283,6 +327,10 @@ public class Covoiturage {
 			membreCourant.editMembreConsole();
 	}
 
+	/**Fonction utilitaire ne permettant pas de renvoyer une string vide
+	 * @param inviteDeChamp string à afficher dans la console en tant que prompt
+	 * @return une string oblogatoirement non vide
+	 */
 	public static String entreeNonVide(String inviteDeChamp){
 		String retour = "";
 		Scanner sc = new Scanner(System.in);
@@ -295,6 +343,9 @@ public class Covoiturage {
 		return retour.trim();
 	}
 
+	/**Fonction utilitaire permettant de peupler les bases de données membres et trajets
+	 * 
+	 */
 	protected static void ajoutFaux(){
 		Preferences preferences = new Preferences();
 

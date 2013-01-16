@@ -13,8 +13,13 @@ import org.joda.time.format.DateTimeFormatterBuilder;
 
 import covoiturage.Covoiturage;
 
+/**Gestion d'un Trajet de covoiturage 
+ * 
+ * @author charlerlin
+ *
+ */
 public class Trajet {
-	protected static int lastID;
+	protected static int lastID; 
 	protected int id;
 	protected String villeDepart;
 	protected String villeArrivee;
@@ -45,7 +50,7 @@ public class Trajet {
 		.toFormatter();
 	}
 
-	/**
+	/** Constructeur de Trajet à partir des éléments fournis en paramètres
 	 * @param villeDepart
 	 * @param villeArrivee
 	 * @param dateDepart
@@ -233,7 +238,11 @@ public class Trajet {
 
 		return t;
 	}
-
+/**Permet de créer une DateTime depuis la console
+ * Notez que la DateTime doit être postérieure au temps actuel (logique pour un système de recherche/réservation de trajets)
+ * 
+ * @return une DateTime avec les données entrées depuis la console
+ */
 	protected static DateTime entrerDateConsole(){
 		Scanner sc = new Scanner(System.in);
 		DateTime horaire = null;
@@ -266,7 +275,12 @@ public class Trajet {
 		return horaire;
 	}
 
-	//A des fins utilitaires uniquement
+	/** Retourne une DateTime à partir de la string passée en paramètre
+	 * Utile pour la création de trajet directement depuis le code
+	 * 
+	 * @param str String qui suit le schéma : "dd-MM-YYYY HH:mm"
+	 * @return une DateTime à partir de la string
+	 */
 	public static DateTime genererDateTime(String str){
 		DateTime horaire = null;
 		try{

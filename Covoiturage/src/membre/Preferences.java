@@ -4,9 +4,16 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
+/**Gestion des préférences pour les membre de façon normalisée permettant la recherche
+ * @author charlerlin
+ *
+ */
 public class Preferences {
 	protected HashMap<String, Boolean> preferences;
 	
+	/**Création d'une nouvelle table de correspondance pour les préférences vide
+	 * 
+	 */
 	public Preferences() {
 		preferences = new HashMap<String, Boolean>();
 	}
@@ -17,6 +24,10 @@ public class Preferences {
 		//TODO
 	}
 	
+	/**Ajout d'une préférence par intitulé et état
+	 * @param s intitulé de la préférence
+	 * @param b état de la préférence
+	 */
 	public void put(String s, Boolean b){
 		preferences.put(s, b);
 	}
@@ -37,6 +48,9 @@ public class Preferences {
 		return positif+negatif;
 	}
 	
+	/**Création d'un ensemble de préférences correspondant aux strings entrées dans la méthode (à des fins de démonstration uniquement)
+	 * @return Une table de préférences
+	 */
 	public static Preferences creerPrefConsole(){
 		String[] basePrefs = {"Conversation", "Musique", "Animaux", "Fumeur"};
 		Preferences listePrefs = new Preferences(); 

@@ -5,6 +5,14 @@ import java.util.Scanner;
 import covoiturage.Covoiturage;
 
 
+/**Gestion des caractéristiques d'un membre du système de Covoiturage
+ * @author charlerlin
+ *
+ */
+/**
+ * @author charlerlin
+ *
+ */
 public class Membre {
 	protected String pseudo;
 	protected String nom;
@@ -12,7 +20,7 @@ public class Membre {
 	protected String telephone;
 	protected Preferences preferences;
 
-	/**
+	/** Création d'un membre par les données passées en paramètres
 	 * @param nom
 	 * @param email
 	 * @param telephone
@@ -38,14 +46,19 @@ public class Membre {
 		System.out.println(m.toStringLong());
 	}
 
+	//GETTERS
 	public String getPseudo() {
 		return pseudo;
 	}
-
 	public String getNom() {
 		return nom;
 	}
-
+	//fin des getters 
+	
+	/**Edition des caractéritiques du membre depuis la console
+	 * Possibilité de changer ou conserver les coordonnées
+	 * Nécessité de réentrer les préférences
+	 */
 	public void editMembreConsole(){
 		System.out.println("Édition du profil (appuyer sur Entrée pour ne pas modifier le champ, sauf pour les préférences)");
 		System.out.println("Votre téléphone actuel est : "+telephone);
@@ -73,10 +86,19 @@ public class Membre {
 		return nom;
 	}
 
+	/**Présentation du membre dans l'intégralité
+	 * @return une string formatée avec toutes les infos sur le membre
+	 */
 	public String toStringLong() {
 		return "Membre : "+pseudo+", nom : "+nom+", email : "+email+", telephone : "+telephone+", preferences : "+preferences;
 	}
 
+	/**Dialogue permettant de créer un membre depuis la console 
+	 * en indiquant le pseudo qui doit être unique dans le système : nécéssité de vérifier avant d'appeler cette méthode
+	 * 
+	 * @param pseudo pseudo du membre (unicité)
+	 * @return un membre créé à partir des données console
+	 */
 	public static Membre creerMembreConsole(String pseudo){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Création d'un nouveau membre.");
