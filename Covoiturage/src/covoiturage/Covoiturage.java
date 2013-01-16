@@ -14,10 +14,6 @@ import trajet.Trajet;
  * @author charlerlin
  *
  */
-/**
- * @author charlerlin
- *
- */
 public class Covoiturage {
 
 	protected static DatabaseTrajet dbT;
@@ -62,7 +58,7 @@ public class Covoiturage {
 
 	}
 
-	
+
 	/**Création d'un nouveau membre, invoque la création d'un membre dans la console
 	 * @param pseudo pseudo unique (normalement) passé en paramètre
 	 * @return un membre avec le pseudo passé en paramètre
@@ -173,9 +169,9 @@ public class Covoiturage {
 		}
 		else{
 			System.out.println("Voici tous les trajets correspondant à votre recherche : ");
-		}
-		for(Trajet tl : trajets){
-			System.out.println(tl);
+			for(Trajet tl : trajets){
+				System.out.println(tl);
+			}
 		}
 		System.out.println("Pour vous inscrire en tant que passager dans un trajet ou créer un nouveau souhait de trajet, veuillez passer par le menu Trajet > Ajouter > Sans conducteur.");
 	}
@@ -267,6 +263,7 @@ public class Covoiturage {
 			System.out.println("aide\t\t(?)\tAfficher cette aide.");
 			System.out.println("rechercher\t(r)\tRechercher un membre par pseudo ou par profil.");
 			System.out.println("modifier\t(m)\tAfficher et/ou modifier votre profil.");
+			System.out.println("trajets\t\t(t)\tRechercher les trajets auxquels vous participez.");
 			System.out.println("afficher\t(a)\tAfficher tous les membres.");
 			System.out.print(">>");
 			choix = sc.nextLine();
@@ -277,6 +274,9 @@ public class Covoiturage {
 		}
 		if(choix.equals("m") || choix.equals("modifier")){
 			menuModifierMembre();
+		}
+		if(choix.equals("t")||choix.equals("trajets")){
+			rechercheTrajetsParticipant(membreCourant);
 		}
 		if(choix.equals("a") || choix.equals("afficher")){
 			System.out.println(dbM.toString());
@@ -309,7 +309,6 @@ public class Covoiturage {
 				System.out.println("Vous pouvez afficher plus d'informations sur le membre en recherchant directement son pseudo.");
 			}
 		}
-		// TODO faire l'affichage des trajets auxquels participe le membre, en tant que conducteur et/ou passager.
 	}
 
 	/**Dialogue permettant de choisir entre affichage et édition du membre courant
@@ -325,6 +324,38 @@ public class Covoiturage {
 		System.out.println(membreCourant.toStringLong());
 		if (choix.equals("e") || choix.equals("editer"))
 			membreCourant.editMembreConsole();
+	}
+
+	/**Recherche et affichage des trajets dans lesquels le membre passé en paramètre participe
+	 * @param m membre à rechercher
+	 */
+	protected static void rechercheTrajetsParticipant(Membre m){
+		ArrayList<Trajet> resConducteur = dbT.getTrajetByConducteur(m);
+		ArrayList<Trajet> resPassager = dbT.getTrajetsWithPassager(m);
+		
+		if(resConducteur.size()==0 && resPassager.size()==0){
+			System.out.println("Vous ne participez encore à aucun trajet");
+		}
+		else{
+			if(resConducteur.size()!=0){
+				System.out.println("Vous participez en tant que conducteur aux trajets suivants : ");
+				for(Trajet tl : resConducteur){
+					System.out.println(tl);
+				}
+			}
+			else{
+				System.out.println("Vous ne participez encore à aucun trajet en tant que conducteur.");
+			}
+			if(resPassager.size()!=0){
+				System.out.println("Vous participez en tant que passager aux trajets suivants : ");
+				for(Trajet tl : resPassager){
+					System.out.println(tl);
+				}
+			}
+			else{
+				System.out.println("Vous ne participez encore à aucun trajet en tant que passager");
+			}
+		}
 	}
 
 	/**Fonction utilitaire ne permettant pas de renvoyer une string vide
@@ -359,7 +390,7 @@ public class Covoiturage {
 		dbM.addMembre(jecree);
 		jecree = new Membre("bleumarine", "Marine Le Pen", "contact@lepen2002-7-12-17.fr", "0651845458", preferences);
 		dbM.addMembre(jecree);
-		
+
 		Trajet t = new Trajet("Lille", "Paris", Trajet.genererDateTime("16-01-2013 08:20"), 3, dbM.rechercherMembrePseudo("charles"), "Clio", true, null);
 		dbT.addTrajet(t);
 	}
