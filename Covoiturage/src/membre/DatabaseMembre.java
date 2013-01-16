@@ -19,7 +19,7 @@ public class DatabaseMembre {
 
 	public Membre rechercherMembrePseudo(String pseudo){
 		for(Membre m : listeMembres){
-			if(pseudo.equalsIgnoreCase(m.getPseudo()))
+			if(pseudo.equalsIgnoreCase(m.getPseudo().trim()))
 				return m;
 		}
 		return null;
@@ -28,7 +28,7 @@ public class DatabaseMembre {
 	public ArrayList<Membre> rechercherMembresNom(String nom){
 		ArrayList<Membre> retour = new ArrayList<Membre>();
 		for(Membre m : listeMembres){
-			if(m.getNom().toLowerCase().indexOf(nom.toLowerCase())!=-1)
+			if(m.getNom().toLowerCase().indexOf(nom.toLowerCase().trim())!=-1)
 				retour.add(m);
 		}
 		return retour;

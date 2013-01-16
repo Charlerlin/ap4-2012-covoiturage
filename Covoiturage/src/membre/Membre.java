@@ -88,9 +88,9 @@ public class Membre {
 		String tel = "";
 		while(!coordOK){
 			System.out.print("Email : ");
-			email = sc.nextLine();
+			email = sc.nextLine().trim();
 			System.out.print("Telephone : ");
-			tel = sc.nextLine();
+			tel = sc.nextLine().trim();
 			if(email.isEmpty() && tel.isEmpty()){
 				System.out.println("Vous devez renseigner au moins une coordonnée, recommencez.");
 			}

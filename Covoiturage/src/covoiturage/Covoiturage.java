@@ -228,6 +228,7 @@ public class Covoiturage {
 			if(resNom.size()!=0){
 				System.out.println("Résulat de la recherche de membres dont le nom contient '"+entry+"'.");
 				System.out.println(resNom);
+				System.out.println("Vous pouvez afficher plus d'informations sur le membre en recherchant directement son pseudo.");
 			}
 		}
 		// TODO
