@@ -24,18 +24,10 @@ public class DatabaseMembre {
 		}
 		return null;
 	}
-	/*public Membre rechercherMembreNom(String nom){
-		for(Membre m : listeMembres){
-			if(nom.equalsIgnoreCase(m.getNom()))
-				return m;
-		}
-		return null;
-	}*/
 
 	public ArrayList<Membre> rechercherMembresNom(String nom){
 		ArrayList<Membre> retour = new ArrayList<Membre>();
 		for(Membre m : listeMembres){
-			//if(nom.equalsIgnoreCase(m.getNom()))
 			if(m.getNom().toLowerCase().indexOf(nom.toLowerCase())!=-1)
 				retour.add(m);
 		}

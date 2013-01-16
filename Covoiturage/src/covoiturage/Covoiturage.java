@@ -212,8 +212,7 @@ public class Covoiturage {
 	protected static void rechercheMembre(){
 		System.out.println("Entrez le nom ou le pseudo du membre que vous recherchez.");
 		System.out.print(">>>");
-		Scanner sc = new Scanner(System.in);
-		String entry = sc.nextLine();
+		String entry = entreeNonVide("");
 
 		Membre resPseudo = dbM.rechercherMembrePseudo(entry);
 		ArrayList<Membre> resNom = dbM.rechercherMembresNom(entry);
@@ -255,7 +254,7 @@ public class Covoiturage {
 			if(retour.isEmpty())
 				System.out.println("Le champ ne peut être vide, recommencez.");
 		}
-		return retour;
+		return retour.trim();
 	}
 
 	protected static void ajoutFaux(){
