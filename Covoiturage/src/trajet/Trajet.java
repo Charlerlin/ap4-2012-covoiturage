@@ -1,5 +1,7 @@
 package trajet;
 
+
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -12,6 +14,8 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormatterBuilder;
 
 import covoiturage.Covoiturage;
+
+
 
 /**Gestion d'un Trajet de covoiturage 
  * La gestion des dates et heure se fait avec la lib <a href="http://joda-time.sourceforge.net">joda-time</a>

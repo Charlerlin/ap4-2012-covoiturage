@@ -1,8 +1,12 @@
 package membre;
 
+
+
 import java.util.Scanner;
 
 import covoiturage.Covoiturage;
+
+
 
 
 /**Gestion des caractéristiques d'un membre du système de Covoiturage
