@@ -70,7 +70,7 @@ public class Membre {
 	 */
 	@Override
 	public String toString() {
-		return pseudo;
+		return nom;
 	}
 
 	public String toStringLong() {

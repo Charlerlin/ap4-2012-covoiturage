@@ -234,6 +234,7 @@ public class Covoiturage {
 	}
 
 	protected static void menuModifierMembre(){
+		//TODO faire l'affichage des trajets auxquels participe le membre, en tant que conducteur et/ou passager.
 		System.out.println("Afficher (a) ou éditer (e) le profil ?");
 		System.out.print(">>>");
 		Scanner sc = new Scanner(System.in);
