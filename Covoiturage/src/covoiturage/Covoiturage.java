@@ -50,9 +50,10 @@ public class Covoiturage {
 		String pseudo = entreeNonVide("Entrez votre pseudo : ");
 		Membre m = dbM.rechercherMembrePseudo(pseudo);
 
-		if (m != null) {
+		if(m != null) {
 			membreCourant = m;
-		} else {
+		} 
+		else {
 			membreCourant = inscription(pseudo);
 		}
 
@@ -157,11 +158,11 @@ public class Covoiturage {
 	 */
 	protected static void menuRechercherTrajet(){
 		System.out.println("Entrez les détails du trajet, nous recherchons les trajets similaires");
-		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
-		boolean avecConducteur = true;
+		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant); //création d'un trajet qui va servir de base de comparaison
+		boolean avecConducteur = true; //attributs du trajet non définis par l'assitant
 		boolean avecPlacesLibres = true;
 		ArrayList<Trajet> trajets = dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur, avecPlacesLibres);
-		avecPlacesLibres = false;
+		avecPlacesLibres = false; //permet de rechercher tous les trajets correspondants
 		trajets.addAll(dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur, avecPlacesLibres));
 
 		if(trajets.size()==0){
@@ -181,8 +182,8 @@ public class Covoiturage {
 	 */
 	protected static void ajoutTrajetSansConducteur(){
 		System.out.println("Entrez les détails de votre trajet, nous recherchons un trajet similaire avec conducteur.");
-		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant);
-		boolean avecConducteur = true;
+		Trajet t = Trajet.creerTrajetSouhaitConsole(membreCourant); //création d'un trajet pour base de comparaison
+		boolean avecConducteur = true; //attributs du trajets non définis par l'assistant
 		boolean avecPlacesLibres = true;
 		ArrayList<Trajet> trajets = dbT.rechercheTrajet(t.getVilleDepart(), t.getVilleArrivee(), t.getDateDepart(), avecConducteur, avecPlacesLibres);
 
@@ -193,12 +194,12 @@ public class Covoiturage {
 		}
 		else{
 			for(Trajet tl : trajets){
-				System.out.println(tl);
+				System.out.println(tl); //liste les trajets trouvés
 			}
 			Scanner sc = new Scanner(System.in);
 			int choixT = 0;
 			boolean choixTOK = false;
-			while(!choixTOK){
+			while(!choixTOK){//entrée d'un choix de trajet par le numéro
 				System.out.print("Numéro du trajet qui vous intéresse : ");
 				try{
 					choixT = sc.nextInt();
@@ -209,7 +210,7 @@ public class Covoiturage {
 					System.out.println("L'entrée n'est pas correcte, merci d'entrer un nombre (sans espaces)");
 					sc.nextLine();
 				}
-				if(choixT<1||!numeroTrajetOK(choixT, trajets)){
+				if(choixT<1||!numeroTrajetOK(choixT, trajets)){//vérification de la validité du choix par rapport aux trajets de la liste
 					System.out.println("Choix incorrect !");
 					choixTOK = false;
 				}
@@ -219,12 +220,12 @@ public class Covoiturage {
 			System.out.println("Voici le trajet que vous avez sélectionné : \n"+tSelect);
 			System.out.print("Êtes vous certain de vouloir participer à ce trajet ? (o/n) : ");
 			String confirmation = sc.nextLine();
-			while(!(confirmation.equals("o")||confirmation.equals("n"))){
+			while(!(confirmation.equals("o")||confirmation.equals("n"))){//demande de confirmation avant d'ajouter le membre au trajet sélectionné
 				System.out.println("Répondre avec 'o' ou 'n'.");
-				System.out.print("Acceptez vous les grands bagages ? (o/n) : ");
+				System.out.print("Êtes vous certain de vouloir participer à ce trajet ? (o/n) : ");
 				confirmation = sc.nextLine();
 			}
-			if(confirmation.equals("o")){
+			if(confirmation.equals("o")){//tentative ajout du membre
 				if(tSelect.addPassager(membreCourant))
 					System.out.println("Vous avez bien été ajouté au trajet");
 				else

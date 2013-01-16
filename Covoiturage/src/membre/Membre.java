@@ -52,7 +52,7 @@ public class Membre {
 	//fin des getters 
 	
 	/**Edition des caractéritiques du membre depuis la console
-	 * Possibilité de changer ou conserver les coordonnées
+	 * Possibilité de changer ou conserver les coordonnées (ne rien entrer de nouveau et valider la saisie)
 	 * Nécessité de réentrer les préférences
 	 */
 	public void editMembreConsole(){

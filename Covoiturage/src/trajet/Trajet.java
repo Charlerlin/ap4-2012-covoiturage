@@ -21,7 +21,7 @@ import covoiturage.Covoiturage;
  *
  */
 public class Trajet {
-	protected static int lastID; 
+	protected static int lastID; //va compter le nombre de trajets créés afin que l'id soit unique
 	protected int id;
 	protected String villeDepart;
 	protected String villeArrivee;
@@ -32,11 +32,11 @@ public class Trajet {
 	protected boolean placeGrandBagages;
 	protected ArrayList<Membre> passagers;
 
-	protected static DateTimeFormatter inDTF;
-	protected static DateTimeFormatter outDTF;
+	protected static DateTimeFormatter inDTF; //format de date en entrée
+	protected static DateTimeFormatter outDTF;//format de date en sortie
 
 	static{
-		lastID=0;
+		lastID=0; 
 		inDTF = DateTimeFormat.forPattern("dd-MM-YYYY HH:mm");
 		outDTF = new DateTimeFormatterBuilder()
 		.appendLiteral("le ")
@@ -249,8 +249,8 @@ public class Trajet {
 	protected static DateTime entrerDateConsole(){
 		Scanner sc = new Scanner(System.in);
 		DateTime horaire = null;
-		boolean dateOK = false;
-		boolean dateFormatOK = false;
+		boolean dateOK = false;//validité de la date au sens chronologique
+		boolean dateFormatOK = false;//validité de la date pour le parsing
 		while(!dateOK){
 			while(!dateFormatOK){
 				System.out.print("Entrer la date de départ (jj-mm-aaaa) : ");
