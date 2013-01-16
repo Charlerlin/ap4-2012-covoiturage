@@ -120,6 +120,9 @@ public class Trajet {
 		}
 		return false;
 	}
+	public boolean hasMembreAsPassager(Membre m){
+		return passagers.contains(m);
+	}
 
 	public boolean dateConcorde(DateTime d){
 		if(dateDepart.minusHours(4).isBefore(d) && dateDepart.plusHours(4).isAfter(d))
@@ -130,8 +133,8 @@ public class Trajet {
 	@Override
 	public String toString() {
 		String retour = "Trajet n°"+id+" de "+villeDepart+" à "+villeArrivee+", départ "+dateDepart.toString(outDTF);
-		if(nbPlaces>=passagers.size())
-			retour+=", "+(nbPlaces-passagers.size())+" places disponibles";
+		if(hasPlacesLibres())
+			retour+=", "+(placesLibres())+" places disponibles";
 		else
 			retour+=", plus de places disponibles";
 		if(conducteur!=null){

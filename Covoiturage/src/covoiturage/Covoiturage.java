@@ -308,7 +308,7 @@ public class Covoiturage {
 		dbM.addMembre(jecree);
 		jecree = new Membre("bleumarine", "Marine Le Pen", "contact@lepen2002-7-12-17.fr", "0651845458", preferences);
 		dbM.addMembre(jecree);
-
+		
 		Trajet t = new Trajet("Lille", "Paris", Trajet.genererDateTime("16-01-2013 08:20"), 3, dbM.rechercherMembrePseudo("charles"), "Clio", true, null);
 		dbT.addTrajet(t);
 	}

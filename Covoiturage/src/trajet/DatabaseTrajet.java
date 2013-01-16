@@ -2,6 +2,8 @@ package trajet;
 
 import java.util.ArrayList;
 
+import membre.Membre;
+
 import org.joda.time.DateTime;
 
 public class DatabaseTrajet {
@@ -40,6 +42,23 @@ public class DatabaseTrajet {
 				return t;
 		}
 		return null;
+	}
+	public ArrayList<Trajet> getTrajetByConducteur(Membre m){
+		ArrayList<Trajet> res = new ArrayList<Trajet>();
+		for(Trajet t : listeTrajets){
+			if(m==t.getConducteur())
+				res.add(t);
+		}
+		return res;
+	}
+	public ArrayList<Trajet> getTrajetsWithPassager(Membre m){
+		ArrayList<Trajet> res = new ArrayList<Trajet>();
+		for(Trajet t : listeTrajets){
+			if(t.hasMembreAsPassager(m)){
+				res.add(t);
+			}
+		}
+		return res;
 	}
 
 	@Override
