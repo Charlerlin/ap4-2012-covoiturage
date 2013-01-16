@@ -70,7 +70,10 @@ public class Trajet {
 		this.conducteur = conducteur;
 		this.vehicule = vehicule;
 		this.placeGrandBagages = placeBagages;
-		this.passagers = new ArrayList<Membre>();
+		if(passagers==null)
+			this.passagers = new ArrayList<Membre>();
+		else
+			this.passagers = passagers;
 	}
 
 	public static void main(String[] args) {
@@ -82,11 +85,10 @@ public class Trajet {
 
 	}
 
+	//GETTERS (et booleans de base)
 	public int getID() {
 		return id;
 	}
-
-	//GETTERS
 	public String getVilleDepart() {
 		return villeDepart;
 	}
@@ -105,7 +107,7 @@ public class Trajet {
 	public boolean hasConducteur(){
 		return !(conducteur==null);
 	}
-	
+
 	public int placesLibres(){
 		return nbPlaces-passagers.size();
 	}
@@ -123,7 +125,13 @@ public class Trajet {
 	public boolean hasMembreAsPassager(Membre m){
 		return passagers.contains(m);
 	}
+	//Fin des getters 
 
+	/**Permet de savoir si la date se trouve dans une marge de ±4 heures autour de l'heure de départ le bon jour
+	 * 
+	 * @param d date/heure de recherche
+	 * @return true si la date entrée est dans un rayon de ± 4 heures autour de l'heure de départ entrée
+	 */
 	public boolean dateConcorde(DateTime d){
 		if(dateDepart.minusHours(4).isBefore(d) && dateDepart.plusHours(4).isAfter(d))
 			return true;
@@ -152,6 +160,11 @@ public class Trajet {
 		return retour;
 	}
 
+	/**Dialogue permettant de créer un trajet depuis la console en tant que conducteur
+	 * 
+	 * @param membreCourant
+	 * @return un trajet créé à partir des données console
+	 */
 	public static Trajet creerTrajetConducteurConsole(Membre membreCourant){
 		System.out.println("Créatin d'un nouveau trajet en tant que conducteur.");
 		Scanner sc = new Scanner(System.in);
@@ -199,7 +212,11 @@ public class Trajet {
 		return t;
 	}
 
-
+	/**Permet de créer un trajet depuis la console en trant que membre
+	 * 
+	 * @param membreCourant
+	 * @return un trajet créé à partir des données console
+	 */
 	public static Trajet creerTrajetSouhaitConsole(Membre membreCourant){
 		System.out.println("Créatin d'un nouveau trajet en tant que passager.");
 
