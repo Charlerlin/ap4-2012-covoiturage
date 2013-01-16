@@ -146,11 +146,12 @@ public class Trajet {
 	@Override
 	public String toString() {
 		String retour = "Trajet n°"+id+" de "+villeDepart+" à "+villeArrivee+", départ "+dateDepart.toString(outDTF);
-		if(hasPlacesLibres())
-			retour+=", "+(placesLibres())+" places disponibles";
-		else
-			retour+=", plus de places disponibles";
-		if(conducteur!=null){
+		if(hasConducteur()){
+			if(hasPlacesLibres())
+				retour+=", "+(placesLibres())+" places disponibles";
+			else
+				retour+=", plus de places disponibles";
+
 			retour+=", conducteur : "+conducteur+", véhicule : "+vehicule+", ";
 			if(placeGrandBagages){
 				retour+="place pour grands bagages.";
@@ -238,11 +239,11 @@ public class Trajet {
 
 		return t;
 	}
-/**Permet de créer une DateTime depuis la console
- * Notez que la DateTime doit être postérieure au temps actuel (logique pour un système de recherche/réservation de trajets)
- * 
- * @return une DateTime avec les données entrées depuis la console
- */
+	/**Permet de créer une DateTime depuis la console
+	 * Notez que la DateTime doit être postérieure au temps actuel (logique pour un système de recherche/réservation de trajets)
+	 * 
+	 * @return une DateTime avec les données entrées depuis la console
+	 */
 	protected static DateTime entrerDateConsole(){
 		Scanner sc = new Scanner(System.in);
 		DateTime horaire = null;

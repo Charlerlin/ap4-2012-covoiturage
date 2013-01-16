@@ -74,7 +74,7 @@ public class Covoiturage {
 	 */
 	protected static boolean menuPrincipal(boolean prems) {
 		if (prems) {
-			System.out.println("Tapez 'aide' pour voir le détail des commandes.");
+			System.out.println("Tapez 'aide' ou '?' pour voir le détail des commandes.");
 			System.out.println("Commandes disponibles : trajets, membre, aide (?), quitter.");
 			System.out.println("Que voulez vous faire ?");
 		}
@@ -394,7 +394,11 @@ public class Covoiturage {
 		jecree = new Membre("bleumarine", "Marine Le Pen", "contact@lepen2002-7-12-17.fr", "0651845458", preferences);
 		dbM.addMembre(jecree);
 
-		Trajet t = new Trajet("Lille", "Paris", Trajet.genererDateTime("16-01-2013 08:20"), 3, dbM.rechercherMembrePseudo("charles"), "Clio", true, null);
+		ArrayList<Membre> passagers = new ArrayList<Membre>();
+		passagers.add(dbM.rechercherMembrePseudo("nainposteur"));
+		Trajet t = new Trajet("Lille", "Paris", Trajet.genererDateTime("18-01-2013 08:20"), 3, dbM.rechercherMembrePseudo("charles"), "Clio", true, passagers);
+		dbT.addTrajet(t);
+		t = new Trajet("Paris", "Lille", Trajet.genererDateTime("19-01-2013 18:00"), 0, null, "", false, passagers);
 		dbT.addTrajet(t);
 	}
 }
