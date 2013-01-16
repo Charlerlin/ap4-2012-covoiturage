@@ -21,7 +21,6 @@ public class Preferences {
 	public static void main(String[] args) {
 		Preferences pref = Preferences.creerPrefConsole();
 		System.out.println(pref.toString());
-		//TODO
 	}
 	
 	/**Ajout d'une préférence par intitulé et état

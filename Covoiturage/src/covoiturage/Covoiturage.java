@@ -10,7 +10,7 @@ import membre.Preferences;
 import trajet.DatabaseTrajet;
 import trajet.Trajet;
 
-/**
+/**Classe principale du système de covoiturage qui gère tout le dialogue console et les appels aux fonctions des autres classes
  * @author charlerlin
  *
  */
@@ -232,7 +232,6 @@ public class Covoiturage {
 
 			}
 		}//fin bloc de sélection de trajet
-		// TODO à terminer
 	}
 
 	/**Vérifie si un trajet de la liste fournie porte bien l'id passé en paramètre

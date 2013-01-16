@@ -14,6 +14,8 @@ import org.joda.time.format.DateTimeFormatterBuilder;
 import covoiturage.Covoiturage;
 
 /**Gestion d'un Trajet de covoiturage 
+ * La gestion des dates et heure se fait avec la lib <a href="http://joda-time.sourceforge.net">joda-time</a>
+ *
  * 
  * @author charlerlin
  *

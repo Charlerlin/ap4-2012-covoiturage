@@ -9,10 +9,6 @@ import covoiturage.Covoiturage;
  * @author charlerlin
  *
  */
-/**
- * @author charlerlin
- *
- */
 public class Membre {
 	protected String pseudo;
 	protected String nom;
