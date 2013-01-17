@@ -54,7 +54,7 @@ public class DatabaseMembre {
 
 	@Override
 	public String toString() {
-		String retour = "Liste des memebres : ";
+		String retour = "Liste des membres : ";
 		for(Membre m : listeMembres){
 			retour+="\n"+m.toStringLong();
 		}

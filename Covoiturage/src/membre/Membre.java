@@ -1,7 +1,5 @@
 package membre;
 
-
-
 import java.util.Scanner;
 
 import covoiturage.Covoiturage;
@@ -83,7 +81,7 @@ public class Membre {
 	 */
 	@Override
 	public String toString() {
-		return nom;
+		return pseudo;
 	}
 
 	/**Présentation du membre dans l'intégralité

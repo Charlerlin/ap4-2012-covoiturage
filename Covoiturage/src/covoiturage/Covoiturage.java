@@ -1,7 +1,5 @@
 package covoiturage;
 
-
-
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -57,6 +55,7 @@ public class Covoiturage {
 		} 
 		else {
 			membreCourant = inscription(pseudo);
+			dbM.addMembre(membreCourant);
 		}
 
 	}
@@ -171,12 +170,12 @@ public class Covoiturage {
 			System.out.println("Aucun trajet avec conducteur ne correspond à votre recherche.");
 		}
 		else{
-			System.out.println("Voici tous les trajets correspondant à votre recherche : ");
+			System.out.println("\nVoici tous les trajets correspondant à votre recherche : ");
 			for(Trajet tl : trajets){
 				System.out.println(tl);
 			}
 		}
-		System.out.println("Pour vous inscrire en tant que passager dans un trajet ou créer un nouveau souhait de trajet, veuillez passer par le menu Trajet > Ajouter > Sans conducteur.");
+		System.out.println("\nPour vous inscrire en tant que passager dans un trajet ou créer un nouveau souhait de trajet, veuillez passer par le menu Trajet > Ajouter > Sans conducteur.");
 	}
 
 	/**Dialogue console permettant d'ajouter un trajet sans conducteur ou proposant de s'inscrire à un trajet si des trajets correspondants existent déjà
@@ -195,6 +194,7 @@ public class Covoiturage {
 			System.out.println("Votre souhait de trajet est bien enregistré.");
 		}
 		else{
+			System.out.println("\nVoici la liste des trajets qui correspondent à votre rechercher : ");
 			for(Trajet tl : trajets){
 				System.out.println(tl); //liste les trajets trouvés
 			}
@@ -202,7 +202,7 @@ public class Covoiturage {
 			int choixT = 0;
 			boolean choixTOK = false;
 			while(!choixTOK){//entrée d'un choix de trajet par le numéro
-				System.out.print("Numéro du trajet qui vous intéresse : ");
+				System.out.print("\nNuméro du trajet qui vous intéresse : ");
 				try{
 					choixT = sc.nextInt();
 					choixTOK = true;
@@ -395,6 +395,8 @@ public class Covoiturage {
 		dbM.addMembre(jecree);
 		jecree = new Membre("bleumarine", "Marine Le Pen", "contact@lepen2002-7-12-17.fr", "0651845458", preferences);
 		dbM.addMembre(jecree);
+		jecree = new Membre("juju", "Julien Sorel", "rouge@noir.com", "06 66 555 66", preferences);
+		dbM.addMembre(jecree);
 
 		ArrayList<Membre> passagers = new ArrayList<Membre>();
 		passagers.add(dbM.rechercherMembrePseudo("nainposteur"));
@@ -402,5 +404,6 @@ public class Covoiturage {
 		dbT.addTrajet(t);
 		t = new Trajet("Paris", "Lille", Trajet.genererDateTime("19-01-2013 18:00"), 0, null, "", false, passagers);
 		dbT.addTrajet(t);
+		dbT.addTrajet(new Trajet("Lille", "Villeneuve", Trajet.genererDateTime("18-01-2013 11:35"), 2, dbM.rechercherMembrePseudo("juju"), "206", false, null));
 	}
 }
